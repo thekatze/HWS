@@ -19,7 +19,7 @@ html, body {
 
 #ihatethis {
     height: 100%;
-
+    vertical-align: top;
     display: inline-block;
     box-sizing: border-box;
 
