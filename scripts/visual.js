@@ -1,5 +1,8 @@
 $(function() {
-
+    
+    $("#loading").fadeOut(500);
+    
+    
     console.log("it works?");
 
     $("header ul li").hover(function() {
@@ -7,4 +10,6 @@ $(function() {
     }, function() {
         $(this).stop().animate({backgroundColor: '#171a21'}, 500);
     });
+    
+    
 });
