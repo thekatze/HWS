@@ -1,8 +1,5 @@
 $(function() {
     
-    $("#loading").fadeOut(500);
-    
-    
     console.log("it works?");
 
     $("header ul li").hover(function() {
