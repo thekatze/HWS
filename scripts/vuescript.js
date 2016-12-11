@@ -1,11 +1,12 @@
 $(function(){
 
-  const Dashboard = {template: "<p>Dashboard</p>" }
-  const Homeworks = {template: "<p>HW</p>"}
-  const Classes = {template: "<p>C</p>"}
-  const Leaderboards = {template: "<p>L</p>"}
-  const Profile = {template: "<p>P</p>"}
-  const NotFound = {template: "<p>NF</p>"}
+  const Dashboard = {template: "<h1>Dashboard<h1>" }
+  const Homeworks = {template: "<h1>Homeworks</h1>"}
+  const Classes = {template: "<h1>Classes</h1>"}
+  const Leaderboards = {template: "<h1>Leaderboards</h1>"}
+  const Profile = {template: "<h1>Profile</h1>"}
+  const NotFound = {template: "<h1>Not Found, please stop breaking this website</h1>"}
+
 
   const routes = [
     {path: '/', component: Dashboard},
@@ -22,4 +23,8 @@ $(function(){
   const app = new Vue({
     router
   }).$mount('#app')
+
+
+
+
 });

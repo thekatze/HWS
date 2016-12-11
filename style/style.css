@@ -91,19 +91,7 @@ main {
     background-color: #e9eaea;
     height: 1500px;
 
-    padding: 130px 12.5% 100px 12.5%;
-}
-
-.card {
-
-    box-sizing: border-box;
-
-
-    border: 2px solid #6f869d;
-
-    background-color: #899cae;
-
-
+    padding: 100px 20% 200px 20%;
 }
 
 
