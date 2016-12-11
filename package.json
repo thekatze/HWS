@@ -1,0 +1,19 @@
+{
+  "name": "homeworksharing",
+  "version": "1.0.0",
+  "description": "A platform to share your homework on",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheKatze/HWS.git"
+  },
+  "author": "TheKatze",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheKatze/HWS/issues"
+  },
+  "homepage": "https://github.com/TheKatze/HWS#readme"
+}
