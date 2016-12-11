@@ -27,22 +27,24 @@
   </head>
 
   <body>
-    <header>
-      <ul>
-        <a href="./"><li><img src="icons/dashboard.svg"><span>Dashboard</span></li></a>
-        <a href="./homeworks.html"><li><img src="icons/homeworks.svg"><span>Homeworks</span></li></a>
-        <a href="./classes.html"><li><img src="icons/classes.svg"><span>Classes</span></li></a>
-        <a href="./leaderboards.html"><li><img src="icons/leaderboards.svg"><span>Leaderboards</span></li></a>
-        <a href="./profile.html"><li><img src="icons/profile.svg"><span>Profile</span></li></a>
-      </ul>
-    </header>
+    <div id="app">
+      <header>
+        <ul>
+          <router-link to="/"><li><img src="icons/dashboard.svg"><span>Dashboard</span></li></router-link>
+          <router-link to="/homeworks"><li><img src="icons/homeworks.svg"><span>Homeworks</span></li></router-link>
+          <router-link to="/classes"><li><img src="icons/classes.svg"><span>Classes</span></li></router-link>
+          <router-link to="/leaderboards"><li><img src="icons/leaderboards.svg"><span>Leaderboards</span></li></router-link>
+          <router-link to="/profile"><li><img src="icons/profile.svg"><span>Profile</span></li></router-link>
+        </ul>
+      </header>
 
-    <main id="app">
+      <main>
+        <router-view></router-view>
+      </main>
 
-    </main>
-
-    <footer>
-      <a href="./impressum.html">Impressum</a>
-    </footer>
+      <footer>
+        <a href="./impressum.html">Impressum</a>
+      </footer>
+    </div>
   </body>
 </html>
