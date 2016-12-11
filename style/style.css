@@ -70,6 +70,10 @@ header ul li img {
     height: 60px;
 }
 
+header ul a {
+    color: #e9eaea;
+}
+
 header ul a:visited {
     color: #e9eaea;
 }
@@ -96,7 +100,7 @@ main {
 
 
     border: 2px solid #6f869d;
-    
+
     background-color: #899cae;
 
 
