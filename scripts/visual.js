@@ -1,9 +1,11 @@
 $(function() {
 
+    /*
+
     console.log("it works?");
 
     $(".navItem").hover(function() {
-        $(this).stop().animate({backgroundColor: '#6f869d'}, 200);
+        $(this).animate({backgroundColor: '#6f869d'}, 200);
     }, function() {
         $(this).stop().animate({backgroundColor: '#171a21'}, 500);
     });
@@ -14,5 +16,7 @@ $(function() {
         scrollTop: 0
     }, 1000);
     });
+
+    */
 
 });

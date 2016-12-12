@@ -45,7 +45,7 @@ header ul {
 }
 
 
-header ul li {
+.navItem {
     display: table;
     text-align: center;
     height: 110px;
@@ -57,7 +57,18 @@ header ul li {
 
 }
 
-header ul li span {
+.navItem:hover {
+    background-color: #6f869d;
+    transition: background-color 250ms ease-in;
+    
+}
+
+.navItem {
+    background-color: #171a21;
+    transition: background-color 750ms ease-out;
+}
+
+.navItem span {
     box-sizing: border-box;
     font-size: 18px;
     padding: 6px 0px;
@@ -65,10 +76,13 @@ header ul li span {
     display: inline-block;
 }
 
-header ul li img {
-    width: 60px;
-    height: 60px;
+.navItem img {
+    margin-top: 14px;
+    width: 50%;
+    height: 50%;
 }
+
+
 
 header ul a {
     color: #e9eaea;
