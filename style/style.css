@@ -92,6 +92,17 @@ header ul a:visited {
     color: #e9eaea;
 }
 
+
+a.router-link-active .navItem::after {
+    content: " ";
+    background: #6f869d;
+    height: 10px;
+    width: 100%;
+    display: -webkit-inline-box;
+    position: relative;
+    transform: translateY(-200%);
+}
+
 /*
     Main
 */
@@ -101,9 +112,9 @@ main {
     box-sizing: border-box;
     width: 100%;
 
+    height: 1000px;
 
     background-color: #e9eaea;
-    height: 1500px;
 
     padding: 100px 20% 200px 20%;
 }
@@ -118,6 +129,8 @@ h1 {
 /*
     Footer
 */
+
+
 
 footer {
     height: 100px;
