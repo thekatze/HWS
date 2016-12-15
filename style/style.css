@@ -103,6 +103,10 @@ a.router-link-active .navItem::after {
     transform: translateY(-200%);
 }
 
+.navBox {
+    float: left;
+}
+
 /*
     Main
 */
