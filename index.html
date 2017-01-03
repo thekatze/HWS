@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!--
     <script src="scripts/jquery-3.1.1.js"></script>
     <script src="scripts/jquery-ui.js"></script>
@@ -23,58 +23,69 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="style/jquery-ui.css" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
-  </head>
+</head>
 
-  <body>
-    <div id="app">
-      <header>
+<body>
+<div id="app">
+    <header>
         <ul>
-          <router-link to="/"><li class="navItem"><img src="svg/dashboard.svg"><span>Dashboard</span></li></router-link>
-          <router-link to="/homeworks"><li class="navItem"><img src="svg/homeworks.svg"><span>Homeworks</span></li></router-link>
-          <router-link to="/classes"><li class="navItem"><img src="svg/classes.svg"><span>Classes</span></li></router-link>
-          <router-link to="/leaderboards"><li class="navItem"><img src="svg/leaderboards.svg"><span>Leaderboards</span></li></router-link>
-           <router-link to="/profile"><li class="navItem"><img src="svg/profile.svg"><span>Profile</span></li></router-link>
+            <router-link to="/">
+                <div class="navBox"><li class="navItem"><img src="svg/dashboard.svg"><span>Dashboard</span></li></div>
+            </router-link>
+            <router-link to="/homeworks">
+                <div class="navBox"><li class="navItem"><img src="svg/homeworks.svg"><span>Homeworks</span></li></div>
+            </router-link>
+            <router-link to="/classes">
+                <div class="navBox"><li class="navItem"><img src="svg/classes.svg"><span>Classes</span></li></div>
+            </router-link>
+            <router-link to="/leaderboards">
+                <div class="navBox"><li class="navItem"><img src="svg/leaderboards.svg"><span>Leaderboards</span></li></div>
+            </router-link>
+            <router-link to="/profile">
+                <div class="navBox"><li class="navItem"><img src="svg/profile.svg"><span>Profile</span></li></div>
+            </router-link>
         </ul>
-      </header>
+    </header>
 
-      <main>
+    <main>
         <router-view></router-view>
-      </main>
+    </main>
 
-      <footer>
-        <a href="./impressum.html">Impressum</a> <br />
+    <footer>
+        <a href="./impressum.html">Impressum</a> <br/>
         <span>Copyright 2016 by Michl (DatBoi) und Leo (Kätzchen)</span>
-      </footer>
-    </div>
+    </footer>
+</div>
 
- <template id="dashboard"> 
+<template id="dashboard">
     <div>
-      <h1> Dashboard </h1>
-      <h2> Hi </h2>
+        <h1> Dashboard </h1>
+        <h2> Hi </h2>
+        <h3> Whazzup? </h3>
+        <h4>  </h4>
     </div>
-  </template>
-  <template id="homeworks"> 
+</template>
+<template id="homeworks">
     <div>
-      <h1> Homeworks </h1>
+        <h1> Homeworks </h1>
     </div>
-  </template>
-  <template id="classes"> 
+</template>
+<template id="classes">
     <div>
-      <h1> Classes </h1>
+        <h1> Classes </h1>
     </div>
-  </template>
-  <template id="leaderboards"> 
+</template>
+<template id="leaderboards">
     <div>
-      <h1> Leaderboards </h1>
+        <h1> Leaderboards </h1>
     </div>
-  </template>
-  <template id="profile"> 
+</template>
+<template id="profile">
     <div>
-      <h1> Profile </h1>
+        <h1> Profile </h1>
     </div>
-  </template>
-  </body>
+</template>
+</body>
 
- 
 
 </html>
