@@ -25,6 +25,7 @@ main {
     height: 100%;
     background-color: #171a21;
     text-align: center;
+    vertical-align: middle;
 }
 
 #contentContainer {
@@ -40,10 +41,10 @@ hr {
 }
 
 .links {
-    height: 100px;
-    background-color: #6f869d;
-    width: 500px;
     margin: auto;
+    margin-top: 2em;
+    height: 60px;
+    width: 500px;
 }
 
 .links ul {
@@ -53,4 +54,24 @@ hr {
 
 .links ul li {
     float: left;
+    width: 250px;
+    
+}
+
+.links ul a {
+    width: 100%;
+    height: 100%;
+    line-height: 60px;
+    background-color: #6f869d;
+    text-decoration: none;
+    padding: 1em 2em;
+}
+
+.links ul a:hover {
+    background-color: #899cae;
+}
+
+a:visited {
+    color: #e9eaea;
+    text-decoration: none;
 }
