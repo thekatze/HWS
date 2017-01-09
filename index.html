@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <!--
     <script src="scripts/jquery-3.1.1.js"></script>
     <script src="scripts/jquery-ui.js"></script>
@@ -12,7 +12,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 
@@ -21,48 +20,96 @@
 
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="style/jquery-ui.css" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
-  </head>
+</head>
 
-  <body>
-    <div id="app">
-      <header>
-        <ul>
-          <router-link to="/"><li class="navItem"><img src="icons/dashboard.svg"><span>Dashboard</span></li></router-link>
-          <router-link to="/homeworks"><li class="navItem"><img src="icons/homeworks.svg"><span>Homeworks</span></li></router-link>
-          <router-link to="/classes"><li class="navItem"><img src="icons/classes.svg"><span>Classes</span></li></router-link>
-          <router-link to="/leaderboards"><li class="navItem"><img src="icons/leaderboards.svg"><span>Leaderboards</span></li></router-link>
-          <router-link to="/profile"><li class="navItem"><img src="icons/profile.svg"><span>Profile</span></li></router-link>
-        </ul>
-      </header>
+<body>
+<div id="app">
+<!--    
+    <router-view>
+        <main>
+            <router-view></router-view>
+        </main>
 
-      <main>
-        <router-view></router-view>
-      </main>
+        <footer>
+            <a href="./impressum.html">Impressum</a> <br/>
+            <span>Copyright 2016 by Michl (DatBoi) und Leo (Kätzchen)</span>
+        </footer>
+    </router-view>
+-->
 
-      <footer>
-        <a href="./impressum.html">Impressum</a>
-      </footer>
+    <router-view>
+    </router-view>
+
+</div>
+
+<template id="menu">
+    <div>
+        <header>
+            <ul>
+                <router-link to="/private/dashboard">
+                    <div class="navBox"><li class="navItem"><img src="svg/dashboard.svg"><span>Dashboard</span></li></div>
+                </router-link>
+                <router-link to="/private/homeworks">
+                    <div class="navBox"><li class="navItem"><img src="svg/homeworks.svg"><span>Homeworks</span></li></div>
+                </router-link>
+                <router-link to="/private/classes">
+                    <div class="navBox"><li class="navItem"><img src="svg/classes.svg"><span>Classes</span></li></div>
+                </router-link>
+                <router-link to="/private/leaderboards">
+                    <div class="navBox"><li class="navItem"><img src="svg/leaderboards.svg"><span>Leaderboards</span></li></div>
+                </router-link>
+                <router-link to="/private/profile">
+                    <div class="navBox"><li class="navItem"><img src="svg/profile.svg"><span>Profile</span></li></div>
+                </router-link>
+            </ul>
+        </header>
+        <main>
+            <router-view></router-view>
+        </main>
+
+        <footer>
+            <a href="./impressum.html">Impressum</a> <br/>
+            <span>Copyright 2016 by Michl (DatBoi) und Leo (Kätzchen)</span>
+        </footer>
     </div>
+</template>
 
- <template id="dashboard"> 
-    <h1> Dashboard </h1>
-  </template>
-  <template id="homeworks"> 
-    <h1> Homeworks </h1>
-  </template>
-  <template id="classes"> 
-    <h1> Classes </h1>
-  </template>
-  <template id="leaderboards"> 
-    <h1> Leaderboards </h1>
-  </template>
-  <template id="profile"> 
-    <h1> Profile </h1>
-  </template>
-  </body>
+<template id="dashboard">
+    <div>
+        <h1> Dashboard </h1>
+        <h2> Hi </h2>
+        <h3> Whazzup? </h3>
+        <h4>  </h4>
+    </div>
+</template>
+<template id="homeworks">
+    <div>
+        <h1> Homeworks </h1>
+    </div>
+</template>
+<template id="classes">
+    <div>
+        <h1> Classes </h1>
+    </div>
+</template>
+<template id="leaderboards">
+    <div>
+        <h1> Leaderboards </h1>
+    </div>
+</template>
+<template id="profile">
+    <div>
+        <h1> Profile </h1>
+    </div>
+</template>
 
- 
+<template id="login">
+    <div>
+        Hello!
+    </div>
+</template>
+</body>
+
 
 </html>
