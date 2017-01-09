@@ -5,15 +5,56 @@ $(function(){
   const Classes = {template: "#classes"}
   const Leaderboards = {template: "#leaderboards"}
   const Profile = {template: "#profile"}
-  const NotFound = {template: "<h1>Not Found, please stop breaking this website</h1>"}
-
+  const Menu = {template: "#menu"}
+  const Login = {template: "#login"}
 
   const routes = [
-    {path: '/', component: Dashboard},
-    {path: '/homeworks', component: Homeworks},
-    {path: '/classes', component: Classes},
-    {path: '/leaderboards', component: Leaderboards},
-    {path: '/profile', component: Profile}
+    {
+      path: '/private/', 
+      component: Menu,
+      children: [
+        {path: 'dashboard', component: Dashboard},
+        {path: '', component: Dashboard}
+      ]
+    },
+
+    {
+      path: '/private/', 
+      component: Menu,
+      children: [
+        {path: 'homeworks', component: Homeworks}
+      ]
+    },
+
+    {
+      path: '/private/', 
+      component: Menu,
+      children: [
+        {path: 'classes', component: Classes}
+      ]
+    },
+
+    {
+      path: '/private/', 
+      component: Menu,
+      children: [
+        {path: 'leaderboards', component: Leaderboards}
+      ]
+    },
+
+    {
+      path: '/private/', 
+      component: Menu,
+      children: [
+        {path: 'profile', component: Profile}
+      ]
+    },
+
+    {
+      path: '/login/', 
+      component: Login
+    }
+
   ]
 
   const router = new VueRouter({
