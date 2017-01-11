@@ -6,11 +6,11 @@ $(function(){
   const Leaderboards = {template: "#leaderboards"}
   const Profile = {template: "#profile"}
   const Menu = {template: "#menu"}
-  const Login = {template: "#login"}
+  const Login = {template: "#loginview"}
 
   const routes = [
     {
-      path: '/private/', 
+      path: '/app/', 
       component: Menu,
       children: [
         {path: 'dashboard', component: Dashboard},
@@ -19,7 +19,7 @@ $(function(){
     },
 
     {
-      path: '/private/', 
+      path: '/app/', 
       component: Menu,
       children: [
         {path: 'homeworks', component: Homeworks}
@@ -27,7 +27,7 @@ $(function(){
     },
 
     {
-      path: '/private/', 
+      path: '/app/', 
       component: Menu,
       children: [
         {path: 'classes', component: Classes}
@@ -35,7 +35,7 @@ $(function(){
     },
 
     {
-      path: '/private/', 
+      path: '/app/', 
       component: Menu,
       children: [
         {path: 'leaderboards', component: Leaderboards}
@@ -43,7 +43,7 @@ $(function(){
     },
 
     {
-      path: '/private/', 
+      path: '/app/', 
       component: Menu,
       children: [
         {path: 'profile', component: Profile}
@@ -52,6 +52,11 @@ $(function(){
 
     {
       path: '/login/', 
+      component: Login
+    },
+
+    {
+      path: '',
       component: Login
     }
 

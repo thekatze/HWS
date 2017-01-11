@@ -13,7 +13,37 @@ html, body {
     font-family: 'Lato', sans-serif;
     margin: 0px;
     padding: 0px;
+    width: 100%;
+    height: 100%;
 }
+
+#app {
+    width: 100%;
+    height: 100%;
+}
+
+#app * {
+    display: inline-block;
+    
+}
+
+#app > * {
+    width: 100%;
+    min-height: 100%;
+    display: block;
+    
+}
+
+#app > * > section {
+    min-height: calc(100% - 110px);
+    box-sizing: border-box;
+    margin-top: 110px;
+    width: 100%;
+    position: absolute;
+    background-color: #e9eaea;
+}
+
+
 
 /*
     Header
@@ -96,12 +126,12 @@ header ul a:visited {
 
 a.router-link-active .navItem::after {
     content: " ";
-    background: #6f869d;
+    background: #899cae;
     height: 10px;
     width: 100%;
     display: -webkit-inline-box;
     position: relative;
-    transform: translateY(-200%);
+    transform: translateY(-210%);
 }
 
 .navBox {
@@ -116,9 +146,7 @@ main {
 
     box-sizing: border-box;
     width: 100%;
-
-    height: 1000px;
-
+    min-height: 100%;
     background-color: #e9eaea;
 
     padding: 100px 20% 200px 20%;
@@ -138,12 +166,16 @@ h1 {
 
 
 footer {
+    
     height: 100px;
+    width: 100%;
     background-color: #171a21;
     color: #313749;
     user-select: none;
     text-align: center;
     vertical-align: middle;
+    position: absolute;
+    bottom: 0px;
 }
 
 footer a {
