@@ -7,6 +7,7 @@ $(function(){
   const Profile = {template: "#profile"}
   const Menu = {template: "#menu"}
   const Login = {template: "#loginview"}
+  const PasswordReset = {template: "#passwordreset"}
 
   const routes = [
     {
@@ -58,6 +59,11 @@ $(function(){
     {
       path: '',
       component: Login
+    },
+
+    {
+      path: '/resetpassword',
+      component: PasswordReset
     }
 
   ]

@@ -95,14 +95,38 @@
     <div id="login">
         <div class="contentContainer">
             <h1>Login</h1>
+            <hr>
             <form>
-                <input type="text" name="username" value="" placeholder="Username">
-                <input type="password" name="password" value="" placeholder="Password">
-                <input type="button" name="submit" value="Submit">
+                <input type="text" name="username" value="" placeholder="Username" class="text">
+                <input type="password" name="password" value="" placeholder="Password" class="text">
+                
+                <input id="submitButton" type="button" name="submit" value="Submit">
+            </form>
+            <router-link to="resetpassword">
+                Forgot Password
+            </router-link>
         </div>
         
     </div>
 </template>
+
+<template id="passwordreset">
+    <div id="login">
+        <div class="contentContainer">
+            <h1>Reset Password</h1>
+            <hr>
+            <form>
+                <input type="text" name="email" value="" placeholder="E-Mail" class="text">
+                
+                <input id="submitButton" type="button" name="submit" value="Submit">
+            </form>
+            <router-link to="login">
+                Back to login
+            </router-link>
+        </div>
+    </div>
+</template>
+
 </body>
 
 
