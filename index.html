@@ -21,66 +21,53 @@
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
+    <link href="style/login.css" rel="stylesheet">
 </head>
 
 <body>
 <div id="app">
-<!--    
-    <router-view>
-        <main>
-            <router-view></router-view>
-        </main>
-
-        <footer>
-            <a href="./impressum.html">Impressum</a> <br/>
-            <span>Copyright 2016 by Michl (DatBoi) und Leo (Kätzchen)</span>
-        </footer>
-    </router-view>
--->
-
     <router-view>
     </router-view>
-
 </div>
 
 <template id="menu">
     <div>
         <header>
             <ul>
-                <router-link to="/private/dashboard">
+                <router-link to="/app/dashboard">
                     <div class="navBox"><li class="navItem"><img src="svg/dashboard.svg"><span>Dashboard</span></li></div>
                 </router-link>
-                <router-link to="/private/homeworks">
+                <router-link to="/app/homeworks">
                     <div class="navBox"><li class="navItem"><img src="svg/homeworks.svg"><span>Homeworks</span></li></div>
                 </router-link>
-                <router-link to="/private/classes">
+                <router-link to="/app/classes">
                     <div class="navBox"><li class="navItem"><img src="svg/classes.svg"><span>Classes</span></li></div>
                 </router-link>
-                <router-link to="/private/leaderboards">
+                <router-link to="/app/leaderboards">
                     <div class="navBox"><li class="navItem"><img src="svg/leaderboards.svg"><span>Leaderboards</span></li></div>
                 </router-link>
-                <router-link to="/private/profile">
+                <router-link to="/app/profile">
                     <div class="navBox"><li class="navItem"><img src="svg/profile.svg"><span>Profile</span></li></div>
                 </router-link>
             </ul>
         </header>
-        <main>
-            <router-view></router-view>
-        </main>
+        <section>
+            <main>
+                <router-view></router-view>
+            </main>
 
-        <footer>
-            <a href="./impressum.html">Impressum</a> <br/>
-            <span>Copyright 2016 by Michl (DatBoi) und Leo (Kätzchen)</span>
-        </footer>
+            <footer>
+                <a href="./impressum.html">Impressum</a> <br/>
+                <span>Copyright 2016 by Michl (DatBoi) und Leo (Kätzchen)</span>
+            </footer>
+        </section>
     </div>
 </template>
 
 <template id="dashboard">
     <div>
         <h1> Dashboard </h1>
-        <h2> Hi </h2>
-        <h3> Whazzup? </h3>
-        <h4>  </h4>
+        
     </div>
 </template>
 <template id="homeworks">
@@ -104,11 +91,43 @@
     </div>
 </template>
 
-<template id="login">
-    <div>
-        Hello!
+<template id="loginview">
+    <div id="login">
+        <div class="contentContainer">
+            <h1>Login</h1>
+            <span id="ee">Wyhyngyht</span>
+            <hr>
+            <form>
+                <input type="text" name="username" value="" placeholder="Username" class="text">
+                <input type="password" name="password" value="" placeholder="Password" class="text">
+                
+                <input id="submitButton" type="button" name="submit" value="Submit">
+            </form>
+            <router-link to="resetpassword">
+                Forgot Password
+            </router-link>
+        </div>
+        
     </div>
 </template>
+
+<template id="passwordreset">
+    <div id="login">
+        <div class="contentContainer">
+            <h1>Reset Password</h1>
+            <hr>
+            <form action="./php/login.php" method="POST">
+                <input type="text" name="email" value="" placeholder="E-Mail" class="text">
+                
+                <input id="submitButton" type="submit" name="submit" value="Submit">
+            </form>
+            <router-link to="login">
+                Back to login
+            </router-link>
+        </div>
+    </div>
+</template>
+
 </body>
 
 
