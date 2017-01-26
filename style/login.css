@@ -43,6 +43,15 @@ form {
     width: 100%;
 }
 
+#ee {
+    color: #171a21;
+    user-select: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    cursor: default;
+}
+
 input {
     width: 100%;
     height: 30px;

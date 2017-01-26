@@ -95,6 +95,7 @@
     <div id="login">
         <div class="contentContainer">
             <h1>Login</h1>
+            <span id="ee">Wyhyngyht</span>
             <hr>
             <form>
                 <input type="text" name="username" value="" placeholder="Username" class="text">
@@ -115,10 +116,10 @@
         <div class="contentContainer">
             <h1>Reset Password</h1>
             <hr>
-            <form>
+            <form action="./php/login.php" method="POST">
                 <input type="text" name="email" value="" placeholder="E-Mail" class="text">
                 
-                <input id="submitButton" type="button" name="submit" value="Submit">
+                <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
             <router-link to="login">
                 Back to login
