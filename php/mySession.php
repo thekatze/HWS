@@ -5,6 +5,7 @@
 
   if (isset($_SESSION)) {
     echo $_SESSION['userid'];
+    echo $_SESSION['login'];
   } else {
     echo 'Error';
   }

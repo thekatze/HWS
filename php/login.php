@@ -17,6 +17,7 @@
     if ($userdata['iduser'] != "" && password_verify($_GET['passwd'], $userdata['password'])) {
       echo "Wrks";
       $_SESSION['userid'] = $userdata['iduser'];
+      $_SESSION['login'] = 1;
       echo session_id();
     } else {
       echo "Passwort oder Nutzername isch falsch";

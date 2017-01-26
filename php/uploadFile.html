@@ -6,6 +6,7 @@
   </head>
   <body>
     <form action="uploadFile.php" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
       <input type="file" name="file" />
       <button type="submit" name="btn-upload">upload</button>
     </form>

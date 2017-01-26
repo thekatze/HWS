@@ -5,7 +5,7 @@
 
   $pdo = create_pdo();
 
-  if (isset($_SESSION) && $_SESSION['login'] = true) {
+  if (isset($_SESSION) && $_SESSION['login'] == 1) {
     try {
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();

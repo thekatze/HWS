@@ -3,6 +3,7 @@
 
   include 'functions.php';
 
+
   $pdo = create_pdo();
 
   if (isset($_SESSION)) {
