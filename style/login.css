@@ -1,0 +1,86 @@
+/*
+Dark:   #171a21
+Shade:  #313749
+Accent: #6f869d
+Shade:  #899cae
+Bright: #e9eaea
+*/
+
+
+#login {
+    width: 100%;
+    height: 100%;
+    background-color: #171a21;
+    color: #e9eaea;
+
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    
+}
+
+.contentContainer h1 {
+    cursor: default;
+    color: #e9eaea;
+    margin: 0;
+}
+
+#login .contentContainer {
+    left: 100%;
+    width: 500px;
+    min-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+hr {
+    width: 100%;
+    margin: 1em 0 2em 0;
+}
+
+form {
+    width: 100%;
+}
+
+#ee {
+    color: #171a21;
+    user-select: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    cursor: default;
+}
+
+input {
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    border: none;
+    font-family: 'Lato', sans-serif;
+
+    background-color: #e9eaea;
+}
+
+
+#submitButton {
+    margin-top: 0.5em;
+    background-color: #6f869d;
+    color: #e9eaea;
+    cursor: pointer;
+}
+
+#submitButton:hover {
+    background-color: #899cae;
+}
+
+a {
+    margin-top: 1em;
+    text-decoration: none;
+    color: #313749;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #313749;
+}
