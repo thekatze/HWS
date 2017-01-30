@@ -1,5 +1,6 @@
-$(function(){
+//Routing
 
+window.onload = function() {
   const Dashboard = {template: "#dashboard" }
   const Homeworks = {template: "#homeworks"}
   const Classes = {template: "#classes"}
@@ -73,10 +74,34 @@ $(function(){
   })
 
   const app = new Vue({
-    router
+    router,
+
+    http: {
+      root: '/php'
+    }
+
   }).$mount('#app')
 
+}
 
+//Login
 
+function login() {
 
-});
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    console.log(username);
+
+    Vue.http.post('/login', {u: username, pw: password}).then(response => {
+        
+    }, response => {
+
+    });
+}
+
+function passwordReset() {
+
+    let email = document.getElementsByName('email');
+
+}

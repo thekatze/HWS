@@ -35,8 +35,10 @@ Bright: #e9eaea
 }
 
 hr {
-    width: 100%;
+    width: calc(100% - 2px);
     margin: 1em 0 2em 0;
+    border-width: 1px;
+
 }
 
 form {
@@ -74,13 +76,13 @@ input {
     background-color: #899cae;
 }
 
-a {
+#login a {
     margin-top: 1em;
     text-decoration: none;
     color: #313749;
 }
 
-a:visited {
+#login a:visited {
     text-decoration: none;
     color: #313749;
 }
