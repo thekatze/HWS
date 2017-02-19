@@ -10,10 +10,9 @@
 
     <meta charset="utf-8">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vue-resource@1.1.0/dist/vue-resource.min.js"></script>
 
     <script src="scripts/visual.js"></script>
     <script src="scripts/vuescript.js"></script>
@@ -65,29 +64,93 @@
 </template>
 
 <template id="dashboard">
-    <div>
-        <h1> Dashboard </h1>
-        
+    <div class="cardContainer">
+        <div class="card">
+            <h1>Welcome back,</h1>
+            <span class="username"> TheKatze </span> <!-- TODO: Make it show stuff -->
+            <router-link to="/app/profile"> Details </router-link>
+
+        </div>
+
+        <div class="card">
+            <h1>Homeworks</h1>
+            <b class="importantNumber"> 3 </b> <!-- TODO: Make it show stuff -->
+            <router-link to="/app/homeworks"> Show </router-link>
+        </div>
+
+        <div class="card">
+            <h1>Your Balance</h1>
+            <span class="currency"> Dollaz </span>
+            <b class="importantNumber"> 36.42 $ </b> <!-- TODO: Make it show stuff -->
+
+            <span class="currency"> Respect </span>
+            <b class="importantNumber"> 12 </b>
+
+            <router-link to="/app/homeworks"> Show </router-link>
+        </div>
+
+
     </div>
 </template>
 <template id="homeworks">
-    <div>
-        <h1> Homeworks </h1>
+    <div class="cardContainer">
+        <div class="card">
+            <h1>AM</h1>
+            <h1>4bWI</h1>
+            <span>until 26.02.17</span>
+        </div>
     </div>
 </template>
 <template id="classes">
-    <div>
-        <h1> Classes </h1>
+    <div class="cardContainer">
+        <div class="card">
+            <h1>4bWI</h1>
+            <span> Show users </span>
+        </div>
     </div>
 </template>
 <template id="leaderboards">
-    <div>
-        <h1> Leaderboards </h1>
+    <div class="cardContainer">
+        <div class="card">
+            <h1>Not yet implemented, come back later</h1>
+        </div>
     </div>
 </template>
 <template id="profile">
-    <div>
-        <h1> Profile </h1>
+    <div class="cardContainer">
+        <div class="card">
+            <h1>TheKatze</h1>
+            <span> User since </span>
+            <b class="importantNumber"> 12.12.16 </b>
+        </div>
+
+        <div class="card">
+            <h1>Dollaz</h1>
+            <span> Amount </span>
+            <b class="importantNumber"> 36.42 $ </b>
+        </div>
+
+        <div class="card">
+            <h1>Respect</h1>
+            <span> Amount </span>
+            <b class="importantNumber"> 12 </b>
+        </div>
+
+        <div class="card">
+            <h1>Manage Account</h1>
+            <span> Email </span>
+            <span> email@email.com </span>
+            <span> Change Password </span>
+            <span> Logout </span>
+        </div>
+
+    </div>
+</template>
+
+<template id="loading">
+    <div class="cssload-container">
+        <div class="cssload-double-torus">
+        </div>
     </div>
 </template>
 
@@ -97,17 +160,17 @@
             <h1>Login</h1>
             <span id="ee">Wyhyngyht</span>
             <hr>
-            <form>
-                <input type="text" name="username" value="" placeholder="Username" class="text">
-                <input type="password" name="password" value="" placeholder="Password" class="text">
-                
-                <input id="submitButton" type="button" name="submit" value="Submit">
+            <form action="javascript:login();">
+                <input type="text" name="username" placeholder="Username" class="text" id="username">
+                <input type="password" name="password" placeholder="Password" class="text" id="password">
+
+                <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
             <router-link to="resetpassword">
                 Forgot Password
             </router-link>
         </div>
-        
+
     </div>
 </template>
 
@@ -116,10 +179,10 @@
         <div class="contentContainer">
             <h1>Reset Password</h1>
             <hr>
-            <form action="./php/login.php" method="POST">
-                <input type="text" name="email" value="" placeholder="E-Mail" class="text">
-                
-                <input id="submitButton" type="submit" name="submit" value="Submit">
+            <form>
+                <input type="text" name="email" placeholder="E-Mail" class="text">
+
+                <input id="submitButton" type="submit" name="submit" value="Submit" onclick="passwordReset()">
             </form>
             <router-link to="login">
                 Back to login

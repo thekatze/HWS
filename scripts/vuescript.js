@@ -1,5 +1,6 @@
-$(function(){
+//Routing
 
+window.onload = function() {
   const Dashboard = {template: "#dashboard" }
   const Homeworks = {template: "#homeworks"}
   const Classes = {template: "#classes"}
@@ -11,54 +12,26 @@ $(function(){
 
   const routes = [
     {
-      path: '/app/', 
+      path: '/app/',
       component: Menu,
       children: [
         {path: 'dashboard', component: Dashboard},
-        {path: '', component: Dashboard}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
-        {path: 'homeworks', component: Homeworks}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
-        {path: 'classes', component: Classes}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
-        {path: 'leaderboards', component: Leaderboards}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
+        {path: '', redirect: 'dashboard'},
+        {path: 'homeworks', component: Homeworks},
+        {path: 'classes', component: Classes},
+        {path: 'leaderboards', component: Leaderboards},
         {path: 'profile', component: Profile}
       ]
     },
 
     {
-      path: '/login/', 
+      path: '/login/',
       component: Login
     },
 
     {
       path: '',
-      component: Login
+      redirect: 'login'
     },
 
     {
@@ -70,13 +43,38 @@ $(function(){
 
   const router = new VueRouter({
     routes
+
   })
 
   const app = new Vue({
-    router
+    router,
+
+    http: {
+      root: '/php'
+    }
+
   }).$mount('#app')
 
+}
 
+//Login
 
+function login() {
 
-});
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    console.log(username);
+
+    Vue.http.post('/login', {u: username, pw: password}).then(response => {
+
+    }, response => {
+
+    });
+}
+
+function passwordReset() {
+
+    let email = document.getElementsByName('email');
+
+}
