@@ -24,6 +24,7 @@ Bright: #e9eaea
     cursor: default;
     color: #e9eaea;
     margin: 0;
+    font-weight: normal;
 }
 
 #login .contentContainer {

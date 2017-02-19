@@ -16,38 +16,10 @@ window.onload = function() {
       component: Menu,
       children: [
         {path: 'dashboard', component: Dashboard},
-        {path: '', component: Dashboard}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
-        {path: 'homeworks', component: Homeworks}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
-        {path: 'classes', component: Classes}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
-        {path: 'leaderboards', component: Leaderboards}
-      ]
-    },
-
-    {
-      path: '/app/', 
-      component: Menu,
-      children: [
+        {path: '', redirect: 'dashboard'},
+        {path: 'homeworks', component: Homeworks},
+        {path: 'classes', component: Classes},
+        {path: 'leaderboards', component: Leaderboards},
         {path: 'profile', component: Profile}
       ]
     },
