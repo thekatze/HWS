@@ -43,6 +43,7 @@ window.onload = function() {
 
   const router = new VueRouter({
     routes
+
   })
 
   const app = new Vue({
