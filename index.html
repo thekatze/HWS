@@ -9,7 +9,7 @@
     -->
 
     <meta charset="utf-8">
-    
+
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://unpkg.com/vue-resource@1.1.0/dist/vue-resource.min.js"></script>
@@ -64,14 +64,24 @@
 </template>
 
 <template id="dashboard">
-    <div>
+    <div class="cardContainer">
         <div class="card">
-            <h1>Dashboard</h1>
+            <h1>Welcome back,</h1>
+            <span class="username"> TheKatze </b> <!-- TODO: Make it show stuff -->
+            <router-link to="/app/homeworks"> Details </router-link>
+        </div>
+
+        <div class="card">
+            <h1>Homeworks</h1>
+            <b class="importantNumber"> 3 </b> <!-- TODO: Make it show stuff -->
+            <router-link to="/app/homeworks"> Show </router-link>
         </div>
 
         <div class="card">
             <h1>Stuff</h1>
         </div>
+
+
     </div>
 </template>
 <template id="homeworks">
@@ -111,14 +121,14 @@
             <form action="javascript:login();">
                 <input type="text" name="username" placeholder="Username" class="text" id="username">
                 <input type="password" name="password" placeholder="Password" class="text" id="password">
-                
+
                 <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
             <router-link to="resetpassword">
                 Forgot Password
             </router-link>
         </div>
-        
+
     </div>
 </template>
 
@@ -129,7 +139,7 @@
             <hr>
             <form>
                 <input type="text" name="email" placeholder="E-Mail" class="text">
-                
+
                 <input id="submitButton" type="submit" name="submit" value="Submit" onclick="passwordReset()">
             </form>
             <router-link to="login">

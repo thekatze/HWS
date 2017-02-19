@@ -12,7 +12,7 @@ window.onload = function() {
 
   const routes = [
     {
-      path: '/app/', 
+      path: '/app/',
       component: Menu,
       children: [
         {path: 'dashboard', component: Dashboard},
@@ -25,13 +25,13 @@ window.onload = function() {
     },
 
     {
-      path: '/login/', 
+      path: '/login/',
       component: Login
     },
 
     {
       path: '',
-      component: Login
+      redirect: 'login'
     },
 
     {
@@ -66,7 +66,7 @@ function login() {
     console.log(username);
 
     Vue.http.post('/login', {u: username, pw: password}).then(response => {
-        
+
     }, response => {
 
     });
