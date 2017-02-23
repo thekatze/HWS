@@ -50,7 +50,7 @@ window.onload = function() {
     router,
 
     http: {
-      root: '/php'
+      root: '/'
     }
 
   }).$mount('#app')
@@ -66,7 +66,7 @@ function login() {
 
     console.log(username);
 
-    Vue.http.post('/login', {u: username, pw: password}).then(response => {
+    Vue.http.post('php/login.php', {u: username, pw: password}).then(response => {
 
     }, response => {
 
