@@ -1,0 +1,19 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "homeworks",
+	"type": "object",
+	"properties": {
+		"homeworks": {
+      "type": "array",
+      "items": {
+        "title": "homework",
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "class": {"type": "string"},
+          "date": {"type": "string"}
+        }
+      }
+    }
+	}
+}
