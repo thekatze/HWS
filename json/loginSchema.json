@@ -3,6 +3,6 @@
 	"title": "profile",
 	"type": "object",
 	"properties": {
-    
+    "response": {"type": "number"}
 	}
 }
