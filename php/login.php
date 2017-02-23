@@ -1,6 +1,7 @@
 <?php
   session_start();
   include 'functions.php';
+  include 'constants.php';
 
   $pdo = create_pdo();
 
@@ -8,15 +9,20 @@
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->beginTransaction();
 
+    $post_data = file_get_contents("php://input");
+    $post_username = json_decode($post_data)->{'u'};
+    $post_password = json_decode($post_data)->{'pw'};
+
+
     $get_user_stmt = $pdo->prepare("call get_user_username(:username)");
-    $get_user_stmt->bindParam(':username', $_POST['username']);
+    $get_user_stmt->bindParam(':username', $post_username);
 
     $get_user_stmt->execute();
     $userdata = $get_user_stmt->fetch();
 
     $get_user_stmt->closeCursor();
 
-    if ($userdata['iduser'] != "" && password_verify($_POST['password'], $userdata['password'])) {
+    if ($userdata['iduser'] != "" && password_verify($post_password, $userdata['password'])) {
       $session_id = session_id();
       if (isset($userdata['session_id']) && $userdata['session_id'] != $session_id) {
         session_id($userdata['session_id']);
@@ -31,15 +37,17 @@
 
       $update_user_stmt->execute();
       $update_user_stmt->closeCursor();
-      echo "successfully logged in ".$_SESSION['userid'].$session_id;
+      $data = array('response' => SUCCESS);
     } else {
-      echo "Passwort oder Nutzername isch falsch";
+      $data = array('response' => FAIL);
     }
 
     $pdo->commit();
     //YAY hat geklappt
   } catch (Exception $e) {
     $pdo->rollBack();
-    echo "SQL Error";
+    $data = array('response' => SQL_FAIL);
   }
+  echo json_encode($data);
+  return json_encode($data);
 ?>
