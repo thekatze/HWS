@@ -12,27 +12,22 @@
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
 
-      $update_dashboard_stmt = $pdo->prepare("call get_dashboard_info(:userid)");
-      $update_dashboard_stmt->bindParam(':userid', $_SESSION['userid']);
+      $update_user_stmt = $pdo->prepare("call get_user_info(:userid)");
+      $update_user_stmt->bindParam(':userid', $_SESSION['userid']);
 
-      $update_dashboard_stmt->execute();
-      $data = $update_dashboard_stmt->fetch();
+      $update_user_stmt->execute();
+      $data = $update_user_stmt->fetch();
 
-      $update_dashboard_stmt->closeCursor();
+      $update_user_stmt->closeCursor();
 
       $response = array(
         'response' => SUCCESS,
         'user' => array(
           'name' => $data['username'],
-          'respect' => $data['respect'],
+          'email' => $data['email'],
           'dollaz' => $data['dollaz'],
-          'openHomeworks' => $data['homeworkCount']
-        ),
-        'nextHomework' => array(
-          'id' => $data['homeworkId'],
-          'name' => $data['homeworkName'],
-          'class' => $data['homeworkClass'],
-          'date' => $data['homeworkDate']
+          'respect' => $data['respect'],
+          'timestamp' => $data['timestamp']
         )
       );
 
