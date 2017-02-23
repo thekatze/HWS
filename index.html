@@ -31,6 +31,13 @@
 
 <template id="menu">
     <div>
+      <div class="cssload-container">
+        <div>
+          <div class="cssload-double-torus">
+
+          </div>
+        </div>
+      </div>
         <header>
             <ul>
                 <router-link to="/app/dashboard">
@@ -79,16 +86,21 @@
         </div>
 
         <div class="card">
-            <h1>Your Balance</h1>
-            <span class="currency"> Dollaz </span>
-            <b class="importantNumber"> 36.42 $ </b> <!-- TODO: Make it show stuff -->
-
-            <span class="currency"> Respect </span>
-            <b class="importantNumber"> 12 </b>
-
-            <router-link to="/app/homeworks"> Show </router-link>
+            <h1>Dollaz</h1>
+            <span> Amount </span>
+            <b class="importantNumber"> 36.42 $ </b>
         </div>
 
+        <div class="card">
+            <h1>Respect</h1>
+            <span> Amount </span>
+            <b class="importantNumber"> 12 </b>
+        </div>
+
+        <div class="card">
+            <h1>Next Homework</h1>
+
+        </div>
 
     </div>
 </template>
