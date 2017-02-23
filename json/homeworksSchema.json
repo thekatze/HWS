@@ -3,12 +3,13 @@
 	"title": "homeworks",
 	"type": "object",
 	"properties": {
+		"response": {"type": "number"},
 		"homeworks": {
       "type": "array",
       "items": {
-        "title": "homework",
         "type": "object",
         "properties": {
+					"id": {"type": "number"},
           "name": {"type": "string"},
           "class": {"type": "string"},
           "date": {"type": "string"}
