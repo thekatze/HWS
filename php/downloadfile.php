@@ -26,20 +26,24 @@
         $f_size = $file['size'];
         $f_content = $file['data'];
 
+        $get_file_stmt->closeCursor();
+
         header("Content-length: $f_size");
         header("Content-type: $f_type");
         header("Content-Disposition: attachment; filename=$f_name");
         echo $f_content;
+      } else {
+        echo "no File selected";
       }
 
       $pdo->commit();
       //YAY hat geklappt
     } catch (Exception $e) {
       $pdo->rollBack();
-      echo "wut";
+      echo "SQL Error";
     }
   } else {
-    echo 'Error';
+    echo 'Not logged in';
   }
 
 ?>
