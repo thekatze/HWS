@@ -67,7 +67,7 @@
 <template id="dashboard">
     <div>
         <h1> Dashboard </h1>
-        
+
     </div>
 </template>
 <template id="homeworks">
@@ -100,14 +100,14 @@
             <form>
                 <input type="text" name="username" value="" placeholder="Username" class="text">
                 <input type="password" name="password" value="" placeholder="Password" class="text">
-                
+
                 <input id="submitButton" type="button" name="submit" value="Submit">
             </form>
             <router-link to="resetpassword">
                 Forgot Password
             </router-link>
         </div>
-        
+
     </div>
 </template>
 
@@ -118,7 +118,7 @@
             <hr>
             <form action="./php/login.php" method="POST">
                 <input type="text" name="email" value="" placeholder="E-Mail" class="text">
-                
+
                 <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
             <router-link to="login">

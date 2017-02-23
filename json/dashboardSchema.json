@@ -1,0 +1,23 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "dashboard",
+	"type": "object",
+	"properties": {
+		"user": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "respect": {"type": "number"},
+        "dollaz": {"type": "number"},
+        "openHomeworks": {"type": "number"},
+				"nextHomework": {
+					"type": "object",
+					"properties": {
+						"name": {"type": "string"},
+						"date": {"type": "string"}
+					}
+				}
+      }
+    }
+	}
+}

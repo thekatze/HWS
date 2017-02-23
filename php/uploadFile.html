@@ -5,10 +5,19 @@
     <title></title>
   </head>
   <body>
-    <form action="uploadFile.php" method="post" enctype="multipart/form-data">
+    <form action="insert_upload.php" method="post" enctype="multipart/form-data">
+      <input type="number" name="respect" placeholder="Respect" />
+      <input type="number" name="dollaz" placeholder="dollaz" />
+      <input type="text" name="description" placeholder="description" />
       <input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
       <input type="file" name="file" />
+      <input type="number" name="homework_id" placeholder="homework_id" />
       <button type="submit" name="btn-upload">upload</button>
+    </form>
+    <form action="uploadFile.php" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
+      <input type="file" name="file2" />
+      <button type="submit" name="btn-upload2">upload</button>
     </form>
   </body>
 </html>
