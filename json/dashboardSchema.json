@@ -3,6 +3,7 @@
 	"title": "dashboard",
 	"type": "object",
 	"properties": {
+		"response": {"type": "number"},
 		"user": {
       "type": "object",
       "properties": {
@@ -10,12 +11,14 @@
         "respect": {"type": "number"},
         "dollaz": {"type": "number"},
         "openHomeworks": {"type": "number"},
-				"nextHomework": {
-					"type": "object",
-					"properties": {
-						"name": {"type": "string"},
-						"date": {"type": "string"}
-					}
+			},
+			"nextHomework": {
+				"type": "object",
+				"properties": {
+					"id": {"type": "number"},
+					"name": {"type": "string"},
+					"class": {"type": "string"},
+					"date": {"type": "string"}
 				}
       }
     }
