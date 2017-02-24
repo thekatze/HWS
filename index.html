@@ -14,7 +14,6 @@
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://unpkg.com/vue-resource@1.1.0/dist/vue-resource.min.js"></script>
 
-    <script src="scripts/visual.js"></script>
     <script src="scripts/vuescript.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
@@ -27,13 +26,17 @@
 <div id="app">
     <router-view>
     </router-view>
+
+    <div id="notificationBar">
+
+    </div>
 </div>
 
 <template id="menu">
     <div>
-      <div class="cssload-container">
+      <div id="cssloadContainer">
         <div>
-          <div class="cssload-double-torus">
+          <div class="cssloadDoubleTorus">
 
           </div>
         </div>
@@ -173,8 +176,8 @@
             <span id="ee">Wyhyngyht</span>
             <hr>
             <form action="javascript:login();">
-                <input type="text" name="username" placeholder="Username" class="text" id="username">
-                <input type="password" name="password" placeholder="Password" class="text" id="password">
+                <input id="username" type="text" name="username" placeholder="Username" class="text">
+                <input id="password" type="password" name="password" placeholder="Password" class="text">
 
                 <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
@@ -192,7 +195,7 @@
             <h1>Reset Password</h1>
             <hr>
             <form>
-                <input type="text" name="email" placeholder="E-Mail" class="text">
+                <input id="email" type="text" name="email" placeholder="E-Mail" class="text">
 
                 <input id="submitButton" type="submit" name="submit" value="Submit" onclick="passwordReset()">
             </form>
@@ -203,7 +206,10 @@
     </div>
 </template>
 
+<template id="notfound">
+    <div id="404">
+        
+    </div>
+</template>
 </body>
-
-
 </html>
