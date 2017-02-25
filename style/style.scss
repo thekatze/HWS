@@ -7,6 +7,8 @@ $bright: #e9eaea;
 
 $headerFont: 'Oswald', sans-serif;
 $normalFont: 'Lato', sans-serif;
+
+$notificationWidth: 300px;
 /*
     General
 */
@@ -42,6 +44,17 @@ html, body {
         width: 100%;
         position: absolute;
         background-color: $bright;
+    }
+
+    > #notificationBar {
+        width: $notificationWidth;
+        min-width: $notificationWidth;
+        height: 100%;
+        right: 0;
+        top: 0;
+
+        position: fixed;
+
     }
 }
 

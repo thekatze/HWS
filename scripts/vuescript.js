@@ -60,8 +60,8 @@ window.onload = function() {
         router,
 
         http: {
-        root: '/'
-    }
+            root: '/'
+        }
 
     }).$mount('#app')
 }
@@ -73,11 +73,13 @@ function login() {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    if (username = "") {
+    console.log(username);
+
+    if (username == "") {
         return;
     }
 
-    if (password = "") {
+    if (password == "") {
         return;
     }
 
