@@ -11,27 +11,24 @@
     try {
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
+      $userid = 4;
+      $update_classes_stmnt = $pdo->prepare("call get_classes_info(:userid)");
+      $update_classes_stmnt->bindParam(':userid', $_SESSION['userid']);
 
-      $update_homework_stmt = $pdo->prepare("call get_homework_info(:userid)");
-      $update_homework_stmt->bindParam(':userid', $_SESSION['userid']);
+      $update_classes_stmnt->execute();
+      $data = $update_classes_stmnt->fetchAll();
 
-      $update_homework_stmt->execute();
-      $data = $update_homework_stmt->fetchAll();
+      $update_classes_stmnt->closeCursor();
 
-      //Clearing the SQL Array from some thing i dont need
       $workedData = array();
       for ($i=0; $i < count($data); $i++) {
-        $workedData[$i]['homeworkId'] = $data[$i]['homeworkId'];
-        $workedData[$i]['homeworkName'] = $data[$i]['homeworkName'];
-        $workedData[$i]['homeworkClass'] = $data[$i]['homeworkClass'];
-        $workedData[$i]['homeworkDate'] = $data[$i]['homeworkDate'];
+        $workedData[$i]['id'] = intval($data[$i]['classId']);
+        $workedData[$i]['name'] = $data[$i]['className'];
       }
 
-      $update_homework_stmt->closeCursor();
-      //Creating the Success response
       $response = array(
         'response' => SUCCESS,
-        'homeworks' => $workedData
+        'classes' => $workedData
       );
 
       $pdo->commit();

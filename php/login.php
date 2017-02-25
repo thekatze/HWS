@@ -56,5 +56,5 @@
     $response = array('response' => SQL_FAIL);
   }
   //Sending the return value to the js
-  return json_encode($response);
+  echo json_encode($response);
 ?>

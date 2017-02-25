@@ -25,8 +25,8 @@
         'user' => array(
           'name' => $data['username'],
           'email' => $data['email'],
-          'dollaz' => $data['dollaz'],
-          'respect' => $data['respect'],
+          'dollaz' => floatval($data['dollaz']),
+          'respect' => intval($data['respect']),
           'timestamp' => $data['timestamp']
         )
       );
