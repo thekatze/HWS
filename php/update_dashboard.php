@@ -24,9 +24,9 @@
         'response' => SUCCESS,
         'user' => array(
           'name' => $data['username'],
-          'respect' => $data['respect'],
-          'dollaz' => $data['dollaz'],
-          'openHomeworks' => $data['homeworkCount']
+          'respect' => intval($data['respect']),
+          'dollaz' => floatval($data['dollaz']),
+          'openHomeworks' => intval($data['homeworkCount'])
         ),
         'nextHomework' => array(
           'id' => $data['homeworkId'],
