@@ -9,6 +9,10 @@ $headerFont: 'Oswald', sans-serif;
 $normalFont: 'Lato', sans-serif;
 
 $notificationWidth: 300px;
+$notificationHeight: 120px;
+
+$borderRadius: 7px;
+
 /*
     General
 */
@@ -53,8 +57,29 @@ html, body {
         right: 0;
         top: 0;
 
+        margin: 1em;
+
         position: fixed;
 
+        .notification {
+            background-color: $brightAccent;
+            border-radius: $borderRadius;
+            -moz-border-radius: $borderRadius;
+            -webkit-border-radius: $borderRadius;
+
+            width: 100%;
+            height: $notificationHeight;
+
+            h1 {
+                font-size: 12px;
+
+            }
+
+            p {
+                font-size: 8px;
+                padding: 0.5em 1em;
+            }
+        }
     }
 }
 
