@@ -88,13 +88,18 @@ function login() {
 
         console.log(response);
 
-        let responseCode = JSON.parse( response)[0];
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
 
         switch (responseCode) {
             //Code 00: Success
             case 0:
                 console.log("Successfully logged in as " + username);
-                Vue.router.go('/app');
+
+                console.log(app.router);
+
+                app.router.push('/app');
                 startLoad();
                 break;
             //Code 10: Wrong Password
