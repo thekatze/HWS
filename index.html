@@ -13,6 +13,7 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://unpkg.com/vue-resource@1.1.0/dist/vue-resource.min.js"></script>
+    <script src="scripts/vue-cookie.js"></script>
 
     <script src="scripts/vuescript.js"></script>
 
@@ -28,7 +29,10 @@
     </router-view>
 
     <div id="notificationBar">
-
+        <div class="notification">
+            <h1>Wrong Credentials</h1>
+            <p>Password or Username wrong, please check your input</p>
+        </div>
     </div>
 </div>
 
@@ -173,7 +177,7 @@
     <div id="login">
         <div class="contentContainer">
             <h1>Login</h1>
-            <span id="ee">Wyhyngyht</span>
+            <span id="ee">/skywalker</span>
             <hr>
             <form action="javascript:login();">
                 <input id="username" type="text" name="username" placeholder="Username" class="text">
