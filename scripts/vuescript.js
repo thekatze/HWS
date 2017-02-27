@@ -61,13 +61,22 @@ window.onload = function() {
 
     app = new Vue({
         router,
-
         http: {
             root: '/'
         }
 
     }).$mount('#app')
     finishLoad();
+}
+
+function readCookies(n){
+  var a = document.cookie.split('; ');
+  for (var i = 0; i < a.length; i++){
+    var C = a[i].split('=');
+    if (C[0] == n){
+      return C[1];
+    }
+  }
 }
 
 //Login
@@ -92,9 +101,9 @@ function login() {
             case 0:
                 console.log("Successfully logged in as " + username);
 
-                console.log(app.router);
-
-                app.router.push('/app');
+                console.log(app._router);
+                console.log(readCookies('cookiezi'));
+                app._router.push('/app');
                 startLoad();
                 break;
             //Code 10: Wrong Password
