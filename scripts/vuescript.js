@@ -64,6 +64,7 @@ window.onload = function() {
         }
 
     }).$mount('#app')
+    finishLoad();
 }
 
 //Login
@@ -87,7 +88,7 @@ function login() {
 
         console.log(response);
 
-        let responseCode = JSON.parse(response)[0];
+        let responseCode = JSON.parse( response)[0];
 
         switch (responseCode) {
             //Code 00: Success
@@ -122,10 +123,10 @@ function passwordReset() {
 
 //Adds the .hidden class to the loading screen
 function startLoad() {
-    document.getElementById('cssloadContainer').className += " hidden";
+    document.getElementById('cssloadContainer').classList.remove("hidden");
 }
 
 //Removes the .hidden class from the loading screen
 function finishLoad() {
-    document.getElementById('cssloadContainer').className += " hidden";
+    document.getElementById('cssloadContainer').classList.add("hidden");
 }
