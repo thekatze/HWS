@@ -1,4 +1,7 @@
 //Routing
+
+var app;
+
 window.onload = function() {
     const Dashboard = {template: "#dashboard" }
     const Homeworks = {template: "#homeworks"}
@@ -56,15 +59,24 @@ window.onload = function() {
         routes
     })
 
-    const app = new Vue({
+    app = new Vue({
         router,
-
         http: {
             root: '/'
         }
 
     }).$mount('#app')
     finishLoad();
+}
+
+function readCookies(n){
+  var a = document.cookie.split('; ');
+  for (var i = 0; i < a.length; i++){
+    var C = a[i].split('=');
+    if (C[0] == n){
+      return C[1];
+    }
+  }
 }
 
 //Login
@@ -74,27 +86,24 @@ function login() {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    console.log(username);
-
-    if (username == "") {
-        return;
-    }
-
-    if (password == "") {
+    if (username == "" || password == "") {
         return;
     }
 
     Vue.http.post('php/login.php', {u: username, pw: password}).then(response => {
 
-        console.log(response);
+        let responseCode = JSON.parse(response.body);
 
-        let responseCode = JSON.parse( response)[0];
+        responseCode = responseCode.response;
 
         switch (responseCode) {
             //Code 00: Success
             case 0:
                 console.log("Successfully logged in as " + username);
-                Vue.router.go('/app');
+
+                console.log(app._router);
+                console.log(readCookies('cookiezi'));
+                app._router.push('/app');
                 startLoad();
                 break;
             //Code 10: Wrong Password
