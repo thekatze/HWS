@@ -1,4 +1,7 @@
 //Routing
+
+var app;
+
 window.onload = function() {
     const Dashboard = {template: "#dashboard" }
     const Homeworks = {template: "#homeworks"}
@@ -56,7 +59,7 @@ window.onload = function() {
         routes
     })
 
-    const app = new Vue({
+    app = new Vue({
         router,
 
         http: {
@@ -74,19 +77,11 @@ function login() {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    console.log(username);
-
-    if (username == "") {
-        return;
-    }
-
-    if (password == "") {
+    if (username == "" || password == "") {
         return;
     }
 
     Vue.http.post('php/login.php', {u: username, pw: password}).then(response => {
-
-        console.log(response);
 
         let responseCode = JSON.parse(response.body);
 
