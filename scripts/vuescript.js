@@ -63,22 +63,18 @@ window.onload = function() {
         router,
         http: {
             root: '/'
+        },
+        watch: {
+            '$route': function (old, n){
+                console.log(n);
+            }
         }
 
     }).$mount('#app')
 
-    if (readCookies('cookiezi'))
-      app._router.push('/app');
-}
-
-function readCookies(n){
-  var a = document.cookie.split('; ');
-  for (var i = 0; i < a.length; i++){
-    var C = a[i].split('=');
-    if (C[0] == n){
-      return C[1];
+    if (readCookies('cookiezi')) {
+        app._router.push('/app');
     }
-  }
 }
 
 //Login
@@ -140,4 +136,15 @@ function startLoad() {
 //Removes the .hidden class from the loading screen
 function finishLoad() {
     document.getElementById('cssloadContainer').classList.add("hidden");
+}
+
+//Does Cookie stuff
+function readCookies(n){
+  var a = document.cookie.split('; ');
+  for (var i = 0; i < a.length; i++){
+    var C = a[i].split('=');
+    if (C[0] == n){
+      return C[1];
+    }
+  }
 }
