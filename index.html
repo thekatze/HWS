@@ -186,9 +186,20 @@
 
                 <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
-            <router-link to="resetpassword">
-                Forgot Password
-            </router-link>
+            <div id="links">
+                <div class="link">
+                    <router-link to="register">
+                        Sign up
+                    </router-link>
+                </div>
+
+                <div class="link">
+                    <router-link to="resetpassword">
+                        Forgot Password
+                    </router-link>
+                </div>
+
+            </div>
         </div>
 
     </div>
@@ -202,18 +213,20 @@
             <form>
                 <input id="email" type="text" name="email" placeholder="E-Mail" class="text">
 
-                <input id="submitButton" type="submit" name="submit" value="Submit" onclick="passwordReset()">
+                <input id="submitButton" type="submit" name="submit" value="Submit" onclick="javascript:passwordReset();">
             </form>
+
             <router-link to="login">
                 Back to login
             </router-link>
+
         </div>
     </div>
 </template>
 
 <template id="notfound">
     <div id="fourOhFour">
-
+        <h1> whoops </h1>
     </div>
 </template>
 </body>
