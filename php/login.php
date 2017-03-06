@@ -30,7 +30,8 @@
       //Checking of user is already logged in
       if (isset($userdata['session_id']) && $userdata['session_id'] != $session_id) {
         session_id($userdata['session_id']);
-        logout_user();
+        session_unset();
+        session_destroy();
         session_id($session_id);
       }
       //Setting Session varibles
