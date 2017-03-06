@@ -66,7 +66,9 @@ window.onload = function() {
         }
 
     }).$mount('#app')
-    finishLoad();
+
+    if (readCookies('cookiezi'))
+      app._router.push('/app');
 }
 
 function readCookies(n){
