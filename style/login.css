@@ -77,13 +77,21 @@ input {
     background-color: #899cae;
 }
 
-#login a {
+#login .contentContainer #links {
     margin-top: 1em;
+    width: 100%;
+}
+
+#login .contentContainer #links .link {
+    width: 50%;
+}
+
+#login a {
     text-decoration: none;
-    color: #313749;
+    color: #899cae;
 }
 
 #login a:visited {
     text-decoration: none;
-    color: #313749;
+    color: #899cae;
 }
