@@ -5,4 +5,4 @@
 /.vscode
 /.idea
 /.sass-cache
-*.bak
+/sql/*.bak
