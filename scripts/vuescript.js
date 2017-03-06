@@ -64,13 +64,51 @@ window.onload = function() {
         http: {
             root: '/'
         },
+        data :function () {
+          return {
+            user: {
+              name: 'Tets'
+            }
+          }
+        },
         watch: {
-            '$route': function (old, n){
-                console.log(n);
+            '$route': function (newRoute, oldRoute){
+              if (readCookies('cookiezi')) {
+                switch (newRoute.path.split('/')[2]) {
+                  case 'dashboard':
+                      Vue.http.post('php/update_dashboard.php', {}).then(response => {
+                        let responseCode = JSON.parse(response.body);
+                        switch (responseCode.response) {
+                          case 0:
+                            finishLoad();
+                            app.data = responseCode;
+                            document.getElementById('username').innerText = this.data.user.name;
+                            console.log(this);
+                            break;
+                          case 10:
+                            console.log("fail");
+                            break;
+                          case 12:
+                          default:
+                            app._router.push('/login');
+                            break;
+                        }
+                      }, response => {
+
+                      });
+                    break;
+                  default:
+                    //app._router.push('/login');
+                    break;
+
+                }
+              } else {
+                app._router.push('/login');
+              }
             }
         }
 
-    }).$mount('#app')
+    }).$mount('#app');
 
     if (readCookies('cookiezi')) {
         app._router.push('/app');
