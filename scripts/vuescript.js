@@ -3,7 +3,7 @@
 var app;
 
 window.onload = function() {
-    const Dashboard = {template: "#dashboard" }
+    //var Dashboard = {template: "#dashboard" };
     const Homeworks = {template: "#homeworks"}
     const Classes = {template: "#classes"}
     const Leaderboards = {template: "#leaderboards"}
@@ -12,6 +12,51 @@ window.onload = function() {
     const Login = {template: "#loginview"}
     const PasswordReset = {template: "#passwordreset"}
     const NotFound = {template: "#notfound"}
+
+    var Dashboard = Vue.component({
+      data: function () {
+        return {
+          user: {
+            name: 'Tets'
+          }
+        }
+      },
+      template: `
+        <div class="cardContainer">
+          <div class="card">
+              <h1>Welcome back,</h1>
+              <span id="username" class="username">{{user.name}}</span> <!-- TODO: Make it show stuff -->
+              <router-link to="/app/profile"> Details </router-link>
+
+          </div>
+
+          <div class="card">
+              <h1>Homeworks</h1>
+              <b class="importantNumber"> 3 </b> <!-- TODO: Make it show stuff -->
+              <router-link to="/app/homeworks"> Show </router-link>
+          </div>
+
+          <div class="card">
+              <h1>Dollaz</h1>
+              <span> Amount </span>
+              <b class="importantNumber"> 36.42 $ </b>
+          </div>
+
+          <div class="card">
+              <h1>Respect</h1>
+              <span> Amount </span>
+              <b class="importantNumber"> 12 </b>
+          </div>
+
+          <div class="card">
+              <h1>Next Homework</h1>
+
+          </div>
+
+      </div>
+      `
+    });
+
 
     const routes = [
         {
@@ -63,22 +108,56 @@ window.onload = function() {
         router,
         http: {
             root: '/'
+        },
+        data :function () {
+          return {
+            user: {
+              name: 'Tets'
+            }
+          }
+        },
+        watch: {
+            '$route': function (newRoute, oldRoute){
+              if (readCookies('cookiezi')) {
+                switch (newRoute.path.split('/')[2]) {
+                  case 'dashboard':
+                      Vue.http.post('php/update_dashboard.php', {}).then(response => {
+                        let responseCode = JSON.parse(response.body);
+                        switch (responseCode.response) {
+                          case 0:
+                            finishLoad();
+                            app.data = responseCode;
+                            //document.getElementById('username').innerText = this.data.user.name;
+                            console.log(this);
+                            break;
+                          case 10:
+                            console.log("fail");
+                            break;
+                          case 12:
+                          default:
+                            app._router.push('/login');
+                            break;
+                        }
+                      }, response => {
+
+                      });
+                    break;
+                  default:
+                    //app._router.push('/login');
+                    break;
+
+                }
+              } else {
+                app._router.push('/login');
+              }
+            }
         }
 
-    }).$mount('#app')
+    }).$mount('#app');
 
-    if (readCookies('cookiezi'))
-      app._router.push('/app');
-}
-
-function readCookies(n){
-  var a = document.cookie.split('; ');
-  for (var i = 0; i < a.length; i++){
-    var C = a[i].split('=');
-    if (C[0] == n){
-      return C[1];
+    if (readCookies('cookiezi')) {
+        app._router.push('/app');
     }
-  }
 }
 
 //Login
@@ -140,4 +219,15 @@ function startLoad() {
 //Removes the .hidden class from the loading screen
 function finishLoad() {
     document.getElementById('cssloadContainer').classList.add("hidden");
+}
+
+//Does Cookie stuff
+function readCookies(n){
+  var a = document.cookie.split('; ');
+  for (var i = 0; i < a.length; i++){
+    var C = a[i].split('=');
+    if (C[0] == n){
+      return C[1];
+    }
+  }
 }

@@ -29,10 +29,13 @@
       $session_id = session_id();
       //Checking of user is already logged in
       if (isset($userdata['session_id']) && $userdata['session_id'] != $session_id) {
+        session_write_close();
         session_id($userdata['session_id']);
+        session_start();
         session_unset();
         session_destroy();
         session_id($session_id);
+        session_start();
       }
       //Setting Session varibles
       $_SESSION['userid'] = $userdata['iduser'];
