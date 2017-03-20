@@ -170,7 +170,24 @@ window.onload = function() {
                                             case 0:
                                                 for (var i in responseCode.classes) {
                                                     var clas = responseCode.classes[i];
-                                                    document.getElementById('classesContainer').insertAdjacentHTML('beforeend', '<div id="homework_'+ clas.id +'" class="card"><h1>'+ clas.name +'</h1></div>');
+                                                    var status;
+                                                    switch (clas.status) {
+                                                        case 0:
+                                                            status = "WAIT This schould never HaPPAPPFEN";
+                                                            break;
+                                                        case 1:
+                                                            status = 'Member';
+                                                            break;
+                                                        case 2:
+                                                            status = "Invited";
+                                                            break;
+                                                        case 3:
+                                                            status = "You are King";
+                                                            break;
+                                                        default:
+                                                            status = "Holy Shit this is weird."
+                                                    }
+                                                    document.getElementById('classesContainer').insertAdjacentHTML('beforeend', '<div id="homework_'+ clas.id +'" class="card"><h1>'+ clas.name +'</h1><span>'+ status +'</span></div>');
                                                 }
                                                 break;
                                             case 10:
