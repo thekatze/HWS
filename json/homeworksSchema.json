@@ -1,20 +1,30 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "homeworks",
-	"type": "object",
-	"properties": {
-		"response": {"type": "number"},
-		"homeworks": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-					"id": {"type": "number"},
-          "name": {"type": "string"},
-          "class": {"type": "string"},
-          "date": {"type": "string"}
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "homeworks",
+    "type": "object",
+    "properties": {
+        "response": {
+            "type": "number"
+        },
+        "homeworks": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "class": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    }
+                }
+            }
         }
-      }
     }
-	}
 }

@@ -1,18 +1,24 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "classes",
-	"type": "object",
-	"properties": {
-		"response": {"type": "number"},
-		"classes": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-					"id": {"type": "number"},
-          "name": {"type": "string"},
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "classes",
+    "type": "object",
+    "properties": {
+        "response": {
+            "type": "number"
+        },
+        "classes": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                }
+            }
         }
-      }
     }
-	}
 }

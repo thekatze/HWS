@@ -3,63 +3,37 @@
 var app;
 
 window.onload = function() {
-    //var Dashboard = {template: "#dashboard" };
-    const Homeworks = {template: "#homeworks"}
-    const Classes = {template: "#classes"}
-    const Leaderboards = {template: "#leaderboards"}
-    const Profile = {template: "#profile"}
-    const Menu = {template: "#menu"}
-    const Login = {template: "#loginview"}
-    const PasswordReset = {template: "#passwordreset"}
-    const NotFound = {template: "#notfound"}
-
-    var Dashboard = Vue.component({
-      data: function () {
-        return {
-          user: {
-            name: 'Tets'
-          }
-        }
-      },
-      template: `
-        <div class="cardContainer">
-          <div class="card">
-              <h1>Welcome back,</h1>
-              <span id="username" class="username">{{user.name}}</span> <!-- TODO: Make it show stuff -->
-              <router-link to="/app/profile"> Details </router-link>
-
-          </div>
-
-          <div class="card">
-              <h1>Homeworks</h1>
-              <b class="importantNumber"> 3 </b> <!-- TODO: Make it show stuff -->
-              <router-link to="/app/homeworks"> Show </router-link>
-          </div>
-
-          <div class="card">
-              <h1>Dollaz</h1>
-              <span> Amount </span>
-              <b class="importantNumber"> 36.42 $ </b>
-          </div>
-
-          <div class="card">
-              <h1>Respect</h1>
-              <span> Amount </span>
-              <b class="importantNumber"> 12 </b>
-          </div>
-
-          <div class="card">
-              <h1>Next Homework</h1>
-
-          </div>
-
-      </div>
-      `
-    });
+    const Dashboard = {
+        template: "#dashboard"
+    };
+    const Homeworks = {
+        template: "#homeworks"
+    }
+    const Classes = {
+        template: "#classes"
+    }
+    const Leaderboards = {
+        template: "#leaderboards"
+    }
+    const Profile = {
+        template: "#profile"
+    }
+    const Menu = {
+        template: "#menu"
+    }
+    const Login = {
+        template: "#loginview"
+    }
+    const PasswordReset = {
+        template: "#passwordreset"
+    }
+    const NotFound = {
+        template: "#notfound"
+    }
 
 
-    const routes = [
-        {
+
+    const routes = [{
             path: '/404',
             component: NotFound
         },
@@ -67,13 +41,30 @@ window.onload = function() {
         {
             path: '/app/',
             component: Menu,
-            children: [
-                {path: 'dashboard', component: Dashboard},
-                {path: '', redirect: 'dashboard'},
-                {path: 'homeworks', component: Homeworks},
-                {path: 'classes', component: Classes},
-                {path: 'leaderboards', component: Leaderboards},
-                {path: 'profile', component: Profile}
+            children: [{
+                    path: 'dashboard',
+                    component: Dashboard
+                },
+                {
+                    path: '',
+                    redirect: 'dashboard'
+                },
+                {
+                    path: 'homeworks',
+                    component: Homeworks
+                },
+                {
+                    path: 'classes',
+                    component: Classes
+                },
+                {
+                    path: 'leaderboards',
+                    component: Leaderboards
+                },
+                {
+                    path: 'profile',
+                    component: Profile
+                }
             ]
         },
 
@@ -106,50 +97,84 @@ window.onload = function() {
 
     app = new Vue({
         router,
+
         http: {
             root: '/'
         },
-        data :function () {
-          return {
-            user: {
-              name: 'Tets'
-            }
-          }
+
+        ready() {
+            window.addEventListener('onload', this.reload());
         },
-        watch: {
-            '$route': function (newRoute, oldRoute){
-              if (readCookies('cookiezi')) {
-                switch (newRoute.path.split('/')[2]) {
-                  case 'dashboard':
-                      Vue.http.post('php/update_dashboard.php', {}).then(response => {
-                        let responseCode = JSON.parse(response.body);
-                        switch (responseCode.response) {
-                          case 0:
-                            finishLoad();
-                            app.data = responseCode;
-                            //document.getElementById('username').innerText = this.data.user.name;
-                            console.log(this);
-                            break;
-                          case 10:
-                            console.log("fail");
-                            break;
-                          case 12:
-                          default:
-                            app._router.push('/login');
-                            break;
-                        }
-                      }, response => {
 
-                      });
-                    break;
-                  default:
-                    //app._router.push('/login');
-                    break;
+        methods: {
+            reload() {
+                this.updateData(this._router.currentRoute.path.split('/')[2]);
+            },
 
+            updateData(route) {
+                if (readCookies('cookiezi')) {
+                    switch (route) {
+                        case 'dashboard':
+                            Vue.http.post('php/update_dashboard.php', {}).then(response => {
+                                let responseCode = JSON.parse(response.body);
+                                switch (responseCode.response) {
+                                    case 0:
+                                        finishLoad();
+                                        document.getElementById('dashboardUsername').innerText = responseCode.user.name;
+                                        document.getElementById('dashboardOpenHomeworks').innerText = responseCode.user.openHomeworks;
+                                        document.getElementById('dashboardDollaz').innerText = responseCode.user.dollaz;
+                                        document.getElementById('dashboardRespect').innerText = responseCode.user.respect;
+                                        document.getElementById('dashboardHomeworkName').innerText = responseCode.nextHomework.name;
+                                        document.getElementById('dashboardHomeworkClass').innerText = responseCode.nextHomework.class;
+                                        document.getElementById('dashboardHomeworkDate').innerText = "until " + responseCode.nextHomework.date;
+                                        break;
+                                    case 10:
+                                        console.log("fail");
+                                        break;
+                                    case 12:
+                                    default:
+                                        app._router.push('/login');
+                                        break;
+                                }
+                            }, response => {
+
+                            });
+                            break;
+                            case 'homeworks':
+                                Vue.http.post('php/update_homeworks.php', {}).then(response => {
+                                    let responseCode = JSON.parse(response.body);
+                                    switch (responseCode.response) {
+                                        case 0:
+                                            finishLoad();
+                                            console.log(responseCode.homeworks[0]);
+                                            document.getElementById('homeworksContainer').insertAdjacentHTML('beforeend', '<div class="card"><h1>Test</h1></div>');
+                                            break;
+                                        case 10:
+                                            console.log("fail");
+                                            break;
+                                        case 12:
+                                        default:
+                                            app._router.push('/login');
+                                            break;
+                                    }
+                                }, response => {
+
+                                });
+                                break;
+                        default:
+                            //app._router.push('/login');
+                            break;
+
+                    }
+                } else {
+                    app._router.push('/login');
                 }
-              } else {
-                app._router.push('/login');
-              }
+            }
+        },
+
+        watch: {
+            '$route': function(newRoute, oldRoute) {
+                this.updateData(newRoute.path.split('/')[2]);
             }
         }
 
@@ -158,6 +183,7 @@ window.onload = function() {
     if (readCookies('cookiezi')) {
         app._router.push('/app');
     }
+    app.reload();
 }
 
 //Login
@@ -171,7 +197,10 @@ function login() {
         return;
     }
 
-    Vue.http.post('php/login.php', {u: username, pw: password}).then(response => {
+    Vue.http.post('php/login.php', {
+        u: username,
+        pw: password
+    }).then(response => {
 
         let responseCode = JSON.parse(response.body);
 
@@ -187,15 +216,15 @@ function login() {
                 app._router.push('/app');
                 startLoad();
                 break;
-            //Code 10: Wrong Password
+                //Code 10: Wrong Password
             case 10:
                 console.log("Wrong Password")
                 break;
-            //Code 11: MySQL Error
+                //Code 11: MySQL Error
             case 11:
 
                 break;
-            //Any other code: wtf
+                //Any other code: wtf
             default:
                 console.log("WTF, Login returned invalid response code.");
         }
@@ -222,12 +251,12 @@ function finishLoad() {
 }
 
 //Does Cookie stuff
-function readCookies(n){
-  var a = document.cookie.split('; ');
-  for (var i = 0; i < a.length; i++){
-    var C = a[i].split('=');
-    if (C[0] == n){
-      return C[1];
+function readCookies(n) {
+    var a = document.cookie.split('; ');
+    for (var i = 0; i < a.length; i++) {
+        var C = a[i].split('=');
+        if (C[0] == n) {
+            return C[1];
+        }
     }
-  }
 }
