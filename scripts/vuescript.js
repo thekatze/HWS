@@ -119,7 +119,6 @@ window.onload = function() {
                                 let responseCode = JSON.parse(response.body);
                                 switch (responseCode.response) {
                                     case 0:
-                                        finishLoad();
                                         document.getElementById('dashboardUsername').innerText = responseCode.user.name;
                                         document.getElementById('dashboardOpenHomeworks').innerText = responseCode.user.openHomeworks;
                                         document.getElementById('dashboardDollaz').innerText = responseCode.user.dollaz;
@@ -136,6 +135,7 @@ window.onload = function() {
                                         app._router.push('/login');
                                         break;
                                 }
+                                finishLoad();
                             }, response => {
 
                             });
@@ -145,9 +145,10 @@ window.onload = function() {
                                     let responseCode = JSON.parse(response.body);
                                     switch (responseCode.response) {
                                         case 0:
-                                            finishLoad();
-                                            console.log(responseCode.homeworks[0]);
-                                            document.getElementById('homeworksContainer').insertAdjacentHTML('beforeend', '<div class="card"><h1>Test</h1></div>');
+                                            for (var i in responseCode.homeworks) {
+                                                var homework = responseCode.homeworks[i];
+                                                document.getElementById('homeworksContainer').insertAdjacentHTML('beforeend', '<div id="homework_'+ homework.id +'" class="card"><h1>'+ homework.name +'</h1><h1>'+ homework.class +'</h1><span>Until '+ homework.date +'</span></div>');
+                                            }
                                             break;
                                         case 10:
                                             console.log("fail");
@@ -157,10 +158,58 @@ window.onload = function() {
                                             app._router.push('/login');
                                             break;
                                     }
+                                    finishLoad();
                                 }, response => {
 
                                 });
                                 break;
+                                case 'classes':
+                                    Vue.http.post('php/update_classes.php', {}).then(response => {
+                                        let responseCode = JSON.parse(response.body);
+                                        switch (responseCode.response) {
+                                            case 0:
+                                                for (var i in responseCode.classes) {
+                                                    var clas = responseCode.classes[i];
+                                                    document.getElementById('classesContainer').insertAdjacentHTML('beforeend', '<div id="homework_'+ clas.id +'" class="card"><h1>'+ clas.name +'</h1></div>');
+                                                }
+                                                break;
+                                            case 10:
+                                                console.log("fail");
+                                                break;
+                                            case 12:
+                                            default:
+                                                app._router.push('/login');
+                                                break;
+                                        }
+                                        finishLoad();
+                                    }, response => {
+
+                                    });
+                                    break;
+                                    case 'profile':
+                                        Vue.http.post('php/update_profile.php', {}).then(response => {
+                                            let responseCode = JSON.parse(response.body);
+                                            switch (responseCode.response) {
+                                                case 0:
+                                                document.getElementById('profileUsername').innerText = responseCode.user.name;
+                                                document.getElementById('profileDate').innerText = responseCode.user.timestamp;
+                                                document.getElementById('profileDollaz').innerText = responseCode.user.dollaz;
+                                                document.getElementById('profileRespect').innerText = responseCode.user.respect;
+                                                document.getElementById('profileEmail').innerText = responseCode.user.email;
+                                                break;
+                                                case 10:
+                                                    console.log("fail");
+                                                    break;
+                                                case 12:
+                                                default:
+                                                    app._router.push('/login');
+                                                    break;
+                                            }
+                                            finishLoad();
+                                        }, response => {
+
+                                        });
+                                        break;
                         default:
                             //app._router.push('/login');
                             break;
