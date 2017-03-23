@@ -1,8 +1,10 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "login",
-	"type": "object",
-	"properties": {
-    "response": {"type": "number"}
-	}
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "login",
+    "type": "object",
+    "properties": {
+        "response": {
+            "type": "number"
+        }
+    }
 }

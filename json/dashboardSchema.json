@@ -1,26 +1,44 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "dashboard",
-	"type": "object",
-	"properties": {
-		"response": {"type": "number"},
-		"user": {
-      "type": "object",
-      "properties": {
-        "name": {"type": "string"},
-        "respect": {"type": "number"},
-        "dollaz": {"type": "number"},
-        "openHomeworks": {"type": "number"},
-			},
-			"nextHomework": {
-				"type": "object",
-				"properties": {
-					"id": {"type": "number"},
-					"name": {"type": "string"},
-					"class": {"type": "string"},
-					"date": {"type": "string"}
-				}
-      }
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "dashboard",
+    "type": "object",
+    "properties": {
+        "response": {
+            "type": "number"
+        },
+        "user": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "respect": {
+                    "type": "number"
+                },
+                "dollaz": {
+                    "type": "number"
+                },
+                "openHomeworks": {
+                    "type": "number"
+                },
+            },
+            "nextHomework": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "class": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
     }
-	}
 }

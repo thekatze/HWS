@@ -11,7 +11,7 @@
     try {
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
-      
+
       $update_homework_stmt = $pdo->prepare("call get_homework_info(:userid)");
       $update_homework_stmt->bindParam(':userid', $_SESSION['userid']);
 
