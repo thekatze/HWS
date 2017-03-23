@@ -24,6 +24,13 @@
       for ($i=0; $i < count($data); $i++) {
         $workedData[$i]['id'] = intval($data[$i]['classId']);
         $workedData[$i]['name'] = $data[$i]['className'];
+        if ($data[$i]['rep']) {
+            $workedData[$i]['status'] = REP;
+        } elseif ($data[$i]['accepted']) {
+            $workedData[$i]['status'] = YES;
+        } else {
+            $workedData[$i]['status'] = INV;
+        }
       }
 
       $response = array(

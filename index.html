@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!--
     <script src="scripts/jquery-3.1.1.js"></script>
@@ -25,19 +26,21 @@
 </head>
 
 <body>
-<div id="app">
-    <router-view>
-    </router-view>
+    <div id="app">
+        <router-view>
+        </router-view>
 
-    <div id="notificationBar">
-        <div class="notification">
-            <h1>Wrong Credentials</h1>
-            <p>Password or Username wrong, please check your input</p>
+        <div id="notificationBar">
+            <div class="notification">
+                <h1>Wrong Credentials</h1>
+                <p>Password or Username wrong, please check your input</p>
+            </div>
         </div>
-    </div>
-</div>
 
-<template id="menu">
+
+
+    </div>
+    <template id="menu">
     <div>
       <div id="cssloadContainer">
         <div>
@@ -78,88 +81,83 @@
     </div>
 </template>
 
-<template id="dashboard">
+    <template id="dashboard">
     <div class="cardContainer">
         <div class="card">
             <h1>Welcome back,</h1>
-            <span class="username"> TheKatze </span> <!-- TODO: Make it show stuff -->
+            <span id="dashboardUsername" class="username"></span> <!-- TODO: Make it show stuff -->
             <router-link to="/app/profile"> Details </router-link>
 
         </div>
 
         <div class="card">
             <h1>Homeworks</h1>
-            <b class="importantNumber"> 3 </b> <!-- TODO: Make it show stuff -->
+            <b class="importantNumber" id="dashboardOpenHomeworks"></b> <!-- TODO: Make it show stuff -->
             <router-link to="/app/homeworks"> Show </router-link>
         </div>
 
         <div class="card">
             <h1>Dollaz</h1>
             <span> Amount </span>
-            <b class="importantNumber"> 36.42 $ </b>
+            <b class="importantNumber" id="dashboardDollaz"></b>
         </div>
 
         <div class="card">
             <h1>Respect</h1>
             <span> Amount </span>
-            <b class="importantNumber"> 12 </b>
+            <b class="importantNumber" id="dashboardRespect"></b>
         </div>
 
         <div class="card">
             <h1>Next Homework</h1>
-
+            <b class="importantNumber" id="dashboardHomeworkName"></b>
+            <b id="dashboardHomeworkClass"></b>
+            <span id="dashboardHomeworkDate"></span>
         </div>
 
     </div>
 </template>
-<template id="homeworks">
-    <div class="cardContainer">
-        <div class="card">
-            <h1>AM</h1>
-            <h1>4bWI</h1>
-            <span>until 26.02.17</span>
-        </div>
+    <template id="homeworks">
+    <div class="cardContainer" id="homeworksContainer">
+
     </div>
 </template>
-<template id="classes">
-    <div class="cardContainer">
-        <div class="card">
-            <h1>4bWI</h1>
-            <span> Show users </span>
-        </div>
+    <template id="classes">
+    <div class="cardContainer" id="classesContainer">
+        
     </div>
 </template>
-<template id="leaderboards">
+    <template id="leaderboards">
     <div class="cardContainer">
         <div class="card">
             <h1>Not yet implemented, come back later</h1>
         </div>
     </div>
 </template>
-<template id="profile">
+    <template id="profile">
     <div class="cardContainer">
         <div class="card">
-            <h1>TheKatze</h1>
+            <h1 id="profileUsername">TheKatze</h1>
             <span> User since </span>
-            <b class="importantNumber"> 12.12.16 </b>
+            <b class="importantNumber" id="profileDate"></b>
         </div>
 
         <div class="card">
             <h1>Dollaz</h1>
             <span> Amount </span>
-            <b class="importantNumber"> 36.42 $ </b>
+            <b class="importantNumber" id="profileDollaz"></b>
         </div>
 
         <div class="card">
             <h1>Respect</h1>
             <span> Amount </span>
-            <b class="importantNumber"> 12 </b>
+            <b class="importantNumber" id="profileRespect"></b>
         </div>
 
         <div class="card">
             <h1>Manage Account</h1>
             <span> Email </span>
-            <span> email@email.com </span>
+            <span id="profileEmail"></span>
             <span> Change Password </span>
             <span> Logout </span>
         </div>
@@ -167,14 +165,14 @@
     </div>
 </template>
 
-<template id="loading">
+    <template id="loading">
     <div class="cssload-container">
         <div class="cssload-double-torus">
         </div>
     </div>
 </template>
 
-<template id="loginview">
+    <template id="loginview">
     <div id="login">
         <div class="contentContainer">
             <h1>Login</h1>
@@ -205,7 +203,7 @@
     </div>
 </template>
 
-<template id="passwordreset">
+    <template id="passwordreset">
     <div id="login">
         <div class="contentContainer">
             <h1>Reset Password</h1>
@@ -224,10 +222,11 @@
     </div>
 </template>
 
-<template id="notfound">
+    <template id="notfound">
     <div id="fourOhFour">
         <h1> whoops </h1>
     </div>
 </template>
 </body>
+
 </html>

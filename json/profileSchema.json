@@ -1,18 +1,30 @@
 {
-	"$schema": "http://json-schema.org/draft-04/schema#",
-	"title": "profile",
-	"type": "object",
-	"properties": {
-		"response": {"type": "number"},
-		"user": {
-			"type": "object",
-			"properties": {
-				"name": {"type": "string"},
-				"email": {"type": "string"},
-				"dollaz": {"type": "number"},
-				"respect": {"type": "number"},
-				"timestamp": {"type": "string"}
-			}
-		}
-	}
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "profile",
+    "type": "object",
+    "properties": {
+        "response": {
+            "type": "number"
+        },
+        "user": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "dollaz": {
+                    "type": "number"
+                },
+                "respect": {
+                    "type": "number"
+                },
+                "timestamp": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }
