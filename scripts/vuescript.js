@@ -303,7 +303,7 @@ function login() {
 
 function passwordReset() {
     let email = document.getElementsById('email').value;
-    Vue.http.post('php/resetPassword.php')
+    //Vue.http.post('php/resetPassword.php')
 }
 
 //Adds the .hidden class to the loading screen
@@ -314,6 +314,12 @@ function startLoad() {
 //Removes the .hidden class from the loading screen
 function finishLoad() {
     document.getElementById('cssloadContainer').classList.add("hidden");
+}
+
+function logout() {
+    Vue.http.post('php/logout.php', {}).then(response => {
+        app._router.push('/login');
+    });
 }
 
 //Does Cookie stuff
