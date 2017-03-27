@@ -12,10 +12,11 @@
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->beginTransaction();
 
-    $insert_user_stmt = $pdo->prepare("call insert_user(:username_in, :email_in, :passwd_in, @id_out)");
+    $insert_user_stmt = $pdo->prepare("call insert_user(:username_in, :email_in, :passwd_in, :token_in, @id_out)");
     $insert_user_stmt->bindParam(':username_in', $username);
     $insert_user_stmt->bindParam(':email_in', $email);
     $insert_user_stmt->bindParam(':passwd_in', $passwd);
+    $insert_user_stmt->bindParam(':token_in', $token);
 
     $user_ids = array();
 
@@ -23,6 +24,7 @@
       $username = "testUser".$i;
       $email = "test".$i."@test.com";
       $passwd = password_hash("pass", PASSWORD_DEFAULT);
+      $token = md5(uniqid(rand()));
       $insert_user_stmt->execute();
       array_push($user_ids, $pdo->query("select @id_out")->fetch()[0]);
       echo "Username: ".$username." Email: ".$email." Password: pass UserId: ".$user_ids[$i]."</br>";
