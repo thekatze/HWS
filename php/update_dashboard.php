@@ -20,6 +20,8 @@
 
       $update_dashboard_stmt->closeCursor();
 
+
+
       $response = array(
         'response' => SUCCESS,
         'user' => array(
