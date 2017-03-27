@@ -27,6 +27,9 @@ window.onload = function() {
     const PasswordReset = {
         template: "#passwordreset"
     }
+    const Register = {
+        template: "#register"
+    }
     const NotFound = {
         template: "#notfound"
     }
@@ -84,6 +87,11 @@ window.onload = function() {
         },
 
         {
+            path: '/register',
+            component: Register
+        },
+
+        {
             path: '/*',
             redirect: '404'
         }
@@ -123,9 +131,13 @@ window.onload = function() {
                                         document.getElementById('dashboardOpenHomeworks').innerText = responseCode.user.openHomeworks;
                                         document.getElementById('dashboardDollaz').innerText = responseCode.user.dollaz;
                                         document.getElementById('dashboardRespect').innerText = responseCode.user.respect;
-                                        document.getElementById('dashboardHomeworkName').innerText = responseCode.nextHomework.name;
-                                        document.getElementById('dashboardHomeworkClass').innerText = responseCode.nextHomework.class;
-                                        document.getElementById('dashboardHomeworkDate').innerText = "until " + responseCode.nextHomework.date;
+
+                                        console.log(responseCode.nextHomework.name);
+
+                                        if (!(responseCode.nextHomework.name === null)) {
+                                            document.getElementById('dashboardContainer').insertAdjacentHTML('beforeend', '<div class="card"> <h1>Next Homework</h1> <b class="importantNumber">' + responseCode.nextHomework.name + '</b> <b>' + responseCode.nextHomework.class + '</b> <span>' + responseCode.nextHomework.date + '</span> </div>');
+                                        }
+
                                         break;
                                     case 10:
                                         console.log("fail");
@@ -301,9 +313,19 @@ function login() {
     });
 }
 
+function signup() {
+
+}
+
+function logout() {
+    Vue.http.post('php/logout.php', {}).then(response => {
+        app._router.push('/login');
+    });
+}
+
 function passwordReset() {
     let email = document.getElementsById('email').value;
-    Vue.http.post('php/resetPassword.php')
+    //Vue.http.post('php/resetPassword.php')
 }
 
 //Adds the .hidden class to the loading screen

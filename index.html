@@ -2,13 +2,6 @@
 <html>
 
 <head>
-    <!--
-    <script src="scripts/jquery-3.1.1.js"></script>
-    <script src="scripts/jquery-ui.js"></script>
-    <script src="scripts/vue.js"></script>
-
-    -->
-
     <meta charset="utf-8">
 
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -31,10 +24,10 @@
         </router-view>
 
         <div id="notificationBar">
-            <div class="notification">
+            <!-- <div class="notification">
                 <h1>Wrong Credentials</h1>
                 <p>Password or Username wrong, please check your input</p>
-            </div>
+            </div> -->
         </div>
 
 
@@ -82,7 +75,7 @@
 </template>
 
     <template id="dashboard">
-    <div class="cardContainer">
+    <div class="cardContainer" id="dashboardContainer">
         <div class="card">
             <h1>Welcome back,</h1>
             <span id="dashboardUsername" class="username"></span> <!-- TODO: Make it show stuff -->
@@ -107,14 +100,6 @@
             <span> Amount </span>
             <b class="importantNumber" id="dashboardRespect"></b>
         </div>
-
-        <div class="card">
-            <h1>Next Homework</h1>
-            <b class="importantNumber" id="dashboardHomeworkName"></b>
-            <b id="dashboardHomeworkClass"></b>
-            <span id="dashboardHomeworkDate"></span>
-        </div>
-
     </div>
 </template>
     <template id="homeworks">
@@ -124,7 +109,7 @@
 </template>
     <template id="classes">
     <div class="cardContainer" id="classesContainer">
-        
+
     </div>
 </template>
     <template id="leaderboards">
@@ -159,7 +144,7 @@
             <span> Email </span>
             <span id="profileEmail"></span>
             <span> Change Password </span>
-            <span> Logout </span>
+            <span id="logout" onclick="javascript:logout();"> Logout </span>
         </div>
 
     </div>
@@ -184,7 +169,7 @@
 
                 <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
-            <div id="links">
+            <div class="links">
                 <div class="link">
                     <router-link to="register">
                         Sign up
@@ -203,7 +188,30 @@
     </div>
 </template>
 
-    <template id="passwordreset">
+<template id="register">
+    <div id="login">
+        <div class="contentContainer">
+            <h1>Sign Up!</h1>
+            <hr>
+            <form action="javascript:signup();">
+                <input id="email" type="email" name="email" placeholder="E-Mail" class="text">
+                <input id="username" type="text" name="username" placeholder="Username" class="text">
+                <input id="password" type="password" name="password" placeholder="Password" class="text">
+
+                <input id="submitButton" type="submit" name="submit" value="Submit">
+            </form>
+            <div class="links">
+                <div class="link">
+                    <router-link to="login">
+                        Back to login
+                    </router-link>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="passwordreset">
     <div id="login">
         <div class="contentContainer">
             <h1>Reset Password</h1>
@@ -213,10 +221,14 @@
 
                 <input id="submitButton" type="submit" name="submit" value="Submit" onclick="javascript:passwordReset();">
             </form>
+            <div class="links">
+                <div class="link">
+                    <router-link to="login">
+                        Back to login
+                    </router-link>
+                </div>
+            </div>
 
-            <router-link to="login">
-                Back to login
-            </router-link>
 
         </div>
     </div>
@@ -227,6 +239,7 @@
         <h1> whoops </h1>
     </div>
 </template>
+
 </body>
 
 </html>
