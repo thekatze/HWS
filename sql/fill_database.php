@@ -6,7 +6,7 @@
   $pdo = create_pdo();
 
   $date = new DateTime('now');
-  $date->add(new DateInterval('P10D'));
+  $date->add(new DateInterval('P100D'));
 
   try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
