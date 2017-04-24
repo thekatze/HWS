@@ -159,7 +159,7 @@ window.onload = function() {
                                         case 0:
                                             for (var i in responseCode.homeworks) {
                                                 var homework = responseCode.homeworks[i];
-                                                document.getElementById('homeworksContainer').insertAdjacentHTML('beforeend', '<div id="homework_'+ homework.id +'" class="card"><h1>'+ homework.name +'</h1><h1>'+ homework.class +'</h1><span>Until '+ homework.date +'</span></div>');
+                                                document.getElementById('homeworksContainer').insertAdjacentHTML('afterbegin', '<div id="homework_'+ homework.id +'" class="card"><h1>'+ homework.name +'</h1><h1>'+ homework.class +'</h1><span>Until '+ homework.date +'</span></div>');
                                             }
                                             break;
                                         case 10:
@@ -185,19 +185,19 @@ window.onload = function() {
                                                     var status;
                                                     switch (clas.status) {
                                                         case 0:
-                                                            status = "WAIT This schould never HaPPAPPFEN";
+                                                            status = "Congratulations: You broke it!";
                                                             break;
                                                         case 1:
-                                                            status = 'Member';
+                                                            status = 'Student';
                                                             break;
                                                         case 2:
                                                             status = "Invited";
                                                             break;
                                                         case 3:
-                                                            status = "You are King";
+                                                            status = "Class Representative";
                                                             break;
                                                         default:
-                                                            status = "Holy Shit this is weird."
+                                                            status = "Congratulations: You really broke it!"
                                                     }
                                                     document.getElementById('classesContainer').insertAdjacentHTML('beforeend', '<div id="homework_'+ clas.id +'" class="card"><h1>'+ clas.name +'</h1><span>'+ status +'</span></div>');
                                                 }
