@@ -163,6 +163,16 @@ main {
   -webkit-align-content: stretch;
   -ms-flex-line-pack: stretch;
   align-content: stretch; }
+  .cardContainer button {
+    position: relative;
+    margin-left: 1em;
+    border: 2em;
+    font-family: "Oswald", sans-serif;
+    font-size: 16pt;
+    width: 2em;
+    height: 2em;
+    background-color: #6f869d;
+    color: #e9eaea; }
 
 .card {
   width: 250px;
