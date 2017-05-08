@@ -319,6 +319,37 @@ function login() {
 }
 
 function signup() {
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+    let email = document.getElementById('email').value;
+
+    if (username == "" || password == "" || email == "") {
+        return;
+    }
+
+    Vue.http.post('php/register_user.php', {
+        u: username,
+        pw: password,
+        e: email
+    }).then(response => {
+
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
+
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+
+
+    }, response => {
+        console.log("Failed to reach server.");
+    });
 
 }
 
