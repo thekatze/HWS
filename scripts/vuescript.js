@@ -191,22 +191,22 @@ window.onload = function() {
                                                         var status;
                                                         switch (clas.status) {
                                                             case 0:
-                                                                status = "Congratulations: You broke it!";
+                                                                status = '<span>Congratulations: You broke it!<span>';
                                                                 break;
                                                             case 1:
-                                                                status = 'Student';
+                                                                status = '<span>Student<span>';
                                                                 break;
                                                             case 2:
-                                                                status = "Invited";
+                                                                status = '<span>Invited<span>';
                                                                 break;
                                                             case 3:
-                                                                status = "Class Representative";
+                                                                status = '<span>Class Representative</span><button type="button" name="button" onclick="javascript:classRepInfoPopUp('+ clas.id +');">close</button>';
                                                                 break;
                                                             default:
-                                                                status = "Congratulations: You really broke it!"
+                                                                status = '<span>Congratulations: You really broke it!<span>';
                                                         }
                                                         if (document.getElementById('class_'+clas.id) == null) {
-                                                            document.getElementById('classesContainer').insertAdjacentHTML('afterbegin', '<div id="class_'+ clas.id +'" class="card" onclick="javascript:classInfoPopUp('+ clas.id +');"><h1>'+ clas.name +'</h1><span>'+ status +'</span></div>');
+                                                            document.getElementById('classesContainer').insertAdjacentHTML('afterbegin', '<div id="class_'+ clas.id +'" class="card"><h1>'+ clas.name +'</h1>' + status +'</div>');
                                                         }
                                                     }
                                                     break;
@@ -429,10 +429,11 @@ function addClass() {
     })
 }
 
-function classInfoPopUp(classId) {
+function classRepInfoPopUp(classId) {
     document.getElementById('popUp').classList.remove("hidden");
-    document.getElementById('classInfoPopUp').classList.remove("hidden");
-    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<span id="classIdSave" class="hidden">' + classId + '</span>')
+    document.getElementById('classRepInfoPopUp').classList.remove("hidden");
+    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<span id="classIdSave" class="hidden">' + classId + '</span>');
+
     document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<div><span>Michl '+ classId +'</span> <span>Rep</span></div>');
     // TODO: Make that the Classmebmers are variable
 }
@@ -467,9 +468,11 @@ function inviteToClass() {
 }
 
 function popDown() {
-    document.getElementById('popUp').classList.add("hidden");
-    document.getElementById('homeworkPopUp').classList.add("hidden");
-    document.getElementById('classPopUp').classList.add("hidden");
+    var elements = document.getElementsByClassName('popUp');
+    var i;
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.add("hidden");
+    }
 }
 
 function passwordReset() {
