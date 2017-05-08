@@ -24,7 +24,9 @@
         </router-view>
 
         <div id="popUp" class="hidden popUp">
+
             <div id="homeworkPopUp" class="hidden popUp">
+              <h1>Add a Homework</h1>
                 <form action="javascript:addHomework();">
                     <input id="addHomeworkClass" type="text" name="class" placeholder="Class ID" class="text">
                     <input id="addHomeworkName" type="text" name="name" placeholder="Name" class="text">
@@ -35,6 +37,7 @@
             </div>
 
             <div id="classPopUp" class="hidden popUp">
+              <h1>Add a Class</h1>
                 <form action="javascript:addClass();">
                     <input id="addClassName" type="text" name="name" placeholder="Name" class="text">
                     <input id="submitButton" type="submit" name="submit" value="Submit">
@@ -43,13 +46,20 @@
             </div>
 
             <div id="classRepInfoPopUp" class="hidden popUp">
-                <h1>ClassInfo</h1>
+                <h1>Info for the King</h1>
                 <div id="classMembers">
                 </div>
                 <form action="javascript:inviteToClass();">
                     <input id="inviteUserName" type="text" name="name" placeholder="Username" class="text">
                     <input id="submitButton" type="submit" name="submit" value="Invite">
                 </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
+            <div id="classNormInfoPopUp" class="hidden popUp">
+                <h1>Info for Normies</h1>
+                <div id="classMembersNorm">
+                </div>
                 <button type="button" name="button" onclick="javascript:popDown();">close</button>
             </div>
 

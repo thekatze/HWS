@@ -9,12 +9,17 @@
   //Controll if the user is still logged in
   if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
     try {
+        $post_data = file_get_contents("php://input");
+        $post_class = json_decode($post_data)->{'c'};
+        $post_user = json_decode($post_data)->{'u'};
+
+
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
 
-      $insert_acceptance_stmt = $pdo->prepare("call update_user_class_acceptance(:userid, :classid)");
-      $insert_acceptance_stmt->bindParam(':userid', $_SESSION['userid']);
-      $insert_acceptance_stmt->bindParam(':classid', $_SESSION['userid']);
+      $insert_acceptance_stmt = $pdo->prepare("call 	insert_class_user_invite(:userid, :classid)");
+      $insert_acceptance_stmt->bindParam(':userid', $post_user);
+      $insert_acceptance_stmt->bindParam(':classid', $post_class);
 
       $insert_acceptance_stmt->execute();
 
