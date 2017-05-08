@@ -12,7 +12,7 @@
             $post_data = file_get_contents("php://input");
             $post_class = json_decode($post_data)->{'c'};
             $post_date = json_decode($post_data)->{'d'};
-            $post_homework = json_decode($post_data)->{'h'};
+            $post_name = json_decode($post_data)->{'n'};
 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->beginTransaction();
@@ -20,12 +20,13 @@
             $insert_homework_stmt = $pdo->prepare("call insert_homework(:idclass_in, :date_in, :name_in, @id_out)");
             $insert_homework_stmt->bindParam(':idclass_in', $post_class);
             $insert_homework_stmt->bindParam(':date_in', $date_in);
-            $insert_homework_stmt->bindParam(':name_in', $post_homework);
+            $insert_homework_stmt->bindParam(':name_in', $post_name);
 
-            $date_in = $post_date->format('Y-m-d H:i:s');
+            $date_in = date('Y-m-d H:i:s', strtotime($post_date));
             $insert_homework_stmt->execute();
-            $pdo->query("select @id_out")->fetch()[0]);
+            $pdo->query("select @id_out")->fetch()[0];
             $insert_homework_stmt->closeCursor();
+            $pdo->commit();
             $response = array('response' => SUCCESS);
         } catch (Exception $e) {
             //Response if there is a SQL Error

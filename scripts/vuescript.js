@@ -360,6 +360,44 @@ function logout() {
     });
 }
 
+function addHomeworkPopUp() {
+    document.getElementById('popUp').classList.remove("hidden");
+    document.getElementById('homeworkPopUp').classList.remove("hidden");
+}
+function addHomework() {
+    let classId = document.getElementById('addHomeworkClass').value;
+    let name = document.getElementById('addHomeworkName').value;
+    let date = document.getElementById('addHomeworkDate').value;
+    Vue.http.post('php/insert_homework.php', {
+        c: classId,
+        n: name,
+        d: date,
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, Homework created");
+                addHomeworkPopDown();
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+}
+function addHomeworkPopDown() {
+    document.getElementById('popUp').classList.add("hidden");
+    document.getElementById('homeworkPopUp').classList.add("hidden");
+}
+
 function passwordReset() {
     let email = document.getElementsById('email').value;
     //Vue.http.post('php/resetPassword.php')
