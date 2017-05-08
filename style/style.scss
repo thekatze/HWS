@@ -77,7 +77,6 @@ html, body {
 
             > form {
                 position: relative;
-                margin-top: 110px;
             }
 
             > h1 {
@@ -234,7 +233,7 @@ main {
 
 
 
-        border: 2em solid;
+        border: 2px solid;
 
         font-family: $headerFont;
         font-size: 16pt;
@@ -244,6 +243,12 @@ main {
         background-color: $accent;
         color: $bright;
         box-sizing: content-box;
+    }
+
+    .buttonInCard {
+      width: 80px;
+      margin-top: 20px;
+      margin-left: 0;
     }
 
 }

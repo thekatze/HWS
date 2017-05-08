@@ -43,8 +43,7 @@ html, body {
       margin: auto 0;
       position: absolute; }
       #app > #popUp > .popUp > form {
-        position: relative;
-        margin-top: 110px; }
+        position: relative; }
       #app > #popUp > .popUp > h1 {
         position: relative;
         margin-top: 110px; }
@@ -162,7 +161,7 @@ main {
   .cardContainer button {
     position: relative;
     margin-left: 1em;
-    border: 2em solid;
+    border: 2px solid;
     font-family: "Oswald", sans-serif;
     font-size: 16pt;
     width: 2em;
@@ -170,6 +169,10 @@ main {
     background-color: #6f869d;
     color: #e9eaea;
     box-sizing: content-box; }
+  .cardContainer .buttonInCard {
+    width: 80px;
+    margin-top: 20px;
+    margin-left: 0; }
 
 .card {
   width: 250px;

@@ -161,11 +161,17 @@ window.onload = function() {
                                         let responseCode = JSON.parse(response.body);
                                         switch (responseCode.response) {
                                             case 0:
+                                                var myNode = document.getElementById("homeworksContainer");
+                                                while (myNode.firstChild) {
+                                                    if (myNode.firstChild.classList.contains("card")) {
+                                                        myNode.removeChild(myNode.firstChild);
+                                                    } else {
+                                                        break;
+                                                    }
+                                                }
                                                 for (var i in responseCode.homeworks) {
                                                     var homework = responseCode.homeworks[i];
-                                                    if (document.getElementById('homework_'+homework.id) == null) {
-                                                        document.getElementById('homeworksContainer').insertAdjacentHTML('afterbegin', '<div id="homework_'+ homework.id +'" class="card"><h1>'+ homework.name +'</h1><h1>'+ homework.class +'</h1><span>Until '+ homework.date +'</span></div>');
-                                                    }
+                                                    document.getElementById('homeworksContainer').insertAdjacentHTML('afterbegin', '<div id="homework_'+ homework.id +'" class="card"><h1>'+ homework.name +'</h1><h1>'+ homework.class +'</h1><span>Until '+ homework.date +'</span></div>');
                                                 }
                                                 break;
                                             case 10:
@@ -183,31 +189,39 @@ window.onload = function() {
                                     break;
                                     case 'classes':
                                         Vue.http.post('php/update_classes.php', {}).then(response => {
+                                            console.log("ok");
                                             let responseCode = JSON.parse(response.body);
                                             switch (responseCode.response) {
                                                 case 0:
+                                                    var myNode = document.getElementById("classesContainer");
+                                                    while (myNode.firstChild) {
+                                                        if (myNode.firstChild.classList.contains("card")) {
+                                                            myNode.removeChild(myNode.firstChild);
+                                                        } else {
+                                                            break;
+                                                        }
+                                                    }
                                                     for (var i in responseCode.classes) {
                                                         var clas = responseCode.classes[i];
                                                         var status;
                                                         switch (clas.status) {
                                                             case 0:
-                                                                status = "Congratulations: You broke it!";
+                                                                status = '<span>Congratulations: You broke it!<span>';
                                                                 break;
                                                             case 1:
-                                                                status = 'Student';
+                                                                status = '<span>Student<span><button class="buttonInCard" type="button" name="button" onclick="javascript:classNormInfoPopUp('+ clas.id +');">Info</button>';
                                                                 break;
                                                             case 2:
-                                                                status = "Invited";
+                                                                status = '<span>Invited<span><button class="buttonInCard" type="button" name="button" onclick="javascript:classInvAcc('+ clas.id +');">Accept</button><button class="buttonInCard" type="button" name="button" onclick="javascript:classInvDec('+ clas.id +');">Decline</button>';
                                                                 break;
                                                             case 3:
-                                                                status = "Class Representative";
+                                                                status = '<span>Class Representative</span><button class="buttonInCard" type="button" name="button" onclick="javascript:classRepInfoPopUp('+ clas.id +');">Manage</button>';
                                                                 break;
                                                             default:
-                                                                status = "Congratulations: You really broke it!"
+                                                                status = '<span>Congratulations: You really broke it!<span>';
                                                         }
-                                                        if (document.getElementById('class_'+clas.id) == null) {
-                                                            document.getElementById('classesContainer').insertAdjacentHTML('afterbegin', '<div id="class_'+ clas.id +'" class="card" onclick="javascript:classInfoPopUp('+ clas.id +');"><h1>'+ clas.name +'</h1><span>'+ status +'</span></div>');
-                                                        }
+
+                                                        document.getElementById('classesContainer').insertAdjacentHTML('afterbegin', '<div id="class_'+ clas.id +'" class="card"><h1>'+ clas.name +'</h1>' + status +'</div>');
                                                     }
                                                     break;
                                                 case 10:
@@ -220,7 +234,7 @@ window.onload = function() {
                                             }
                                             finishLoad();
                                         }, response => {
-
+                                            console.log("Sometings very wroing");
                                         });
                                         break;
                                         case 'profile':
@@ -429,12 +443,80 @@ function addClass() {
     })
 }
 
-function classInfoPopUp(classId) {
+function classRepInfoPopUp(classId) {
+    var myNode = document.getElementById("classMembers");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
     document.getElementById('popUp').classList.remove("hidden");
-    document.getElementById('classInfoPopUp').classList.remove("hidden");
-    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<span id="classIdSave" class="hidden">' + classId + '</span>')
-    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<div><span>Michl '+ classId +'</span> <span>Rep</span></div>');
+    document.getElementById('classRepInfoPopUp').classList.remove("hidden");
+    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+
+    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<div><span>Michl '+ classId +'</span><span>Rep</span></div>');
     // TODO: Make that the Classmebmers are variable
+}
+
+function classNormInfoPopUp(classId) {
+    var myNode = document.getElementById("classMembersNorm");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
+    document.getElementById('popUp').classList.remove("hidden");
+    document.getElementById('classNormInfoPopUp').classList.remove("hidden");
+    document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+
+    document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<div><span>Michl '+ classId +'</span><span>Rep</span></div>');
+    // TODO: Make that the Classmebmers are variable
+}
+
+function classInvAcc(classId) {
+    Vue.http.post('php/invite_accept.php', {
+        c: classId
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, Invite accepted");
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+}
+
+function classInvDec(classId) {
+    Vue.http.post('php/invite_decline.php', {
+        c: classId
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, Invite declined");
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
 }
 
 function inviteToClass() {
@@ -467,9 +549,11 @@ function inviteToClass() {
 }
 
 function popDown() {
-    document.getElementById('popUp').classList.add("hidden");
-    document.getElementById('homeworkPopUp').classList.add("hidden");
-    document.getElementById('classPopUp').classList.add("hidden");
+    var elements = document.getElementsByClassName('popUp');
+    var i;
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.add("hidden");
+    }
 }
 
 function passwordReset() {
