@@ -26,32 +26,28 @@ html, body {
     width: 100%;
     position: absolute;
     background-color: #e9eaea; }
-  #app > #notificationBar {
-    width: 300px;
-    min-width: 300px;
+  #app > #popUp {
+    width: 100%;
     height: 100%;
     right: 0;
     top: 0;
-    visibility: hidden;
-    margin: 1em;
-    position: fixed; }
-    #app > #notificationBar .notification {
-      border-radius: 7px;
-      -moz-border-radius: 7px;
-      -webkit-border-radius: 7px;
-      width: 100%;
-      height: 120px; }
-      #app > #notificationBar .notification h1 {
-        font-size: 12px; }
-      #app > #notificationBar .notification p {
-        font-size: 8px;
-        padding: 0.5em 1em; }
-      #app > #notificationBar .notification .error {
-        background-color: #9d6f6f; }
-      #app > #notificationBar .notification .warning {
-        background-color: #9c9d6f; }
-      #app > #notificationBar .notification .success {
-        background-color: #6f9d6f; }
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8); }
+    #app > #popUp > .popUp {
+      width: 50%;
+      min-width: 300px;
+      height: 100%;
+      right: 0;
+      top: 0;
+      background-color: #e9eaea;
+      margin: auto 0;
+      position: absolute; }
+      #app > #popUp > .popUp > form {
+        position: relative;
+        margin-top: 110px; }
+      #app > #popUp > .popUp > h1 {
+        position: relative;
+        margin-top: 110px; }
 
 .hidden {
   display: none !important; }
@@ -166,13 +162,14 @@ main {
   .cardContainer button {
     position: relative;
     margin-left: 1em;
-    border: 2em;
+    border: 2em solid;
     font-family: "Oswald", sans-serif;
     font-size: 16pt;
     width: 2em;
     height: 2em;
     background-color: #6f869d;
-    color: #e9eaea; }
+    color: #e9eaea;
+    box-sizing: content-box; }
 
 .card {
   width: 250px;

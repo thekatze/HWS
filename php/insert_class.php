@@ -10,22 +10,21 @@
     if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
         try {
             $post_data = file_get_contents("php://input");
-            $post_class = json_decode($post_data)->{'c'};
-            $post_date = json_decode($post_data)->{'d'};
             $post_name = json_decode($post_data)->{'n'};
+
+            $user = $_SESSION['userid'];
+
 
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $pdo->beginTransaction();
 
-            $insert_homework_stmt = $pdo->prepare("call insert_homework(:idclass_in, :date_in, :name_in, @id_out)");
-            $insert_homework_stmt->bindParam(':idclass_in', $post_class);
-            $insert_homework_stmt->bindParam(':date_in', $date_in);
-            $insert_homework_stmt->bindParam(':name_in', $post_name);
+            $insert_class_stmt = $pdo->prepare("call insert_class(:classname_in, :iduser_in, @id_out)");
+            $insert_class_stmt->bindParam(':classname_in', $post_name);
+            $insert_class_stmt->bindParam(':iduser_in', $user);
 
-            $date_in = date('Y-m-d H:i:s', strtotime($post_date));
-            $insert_homework_stmt->execute();
+            $insert_class_stmt->execute();
             $pdo->query("select @id_out")->fetch()[0];
-            $insert_homework_stmt->closeCursor();
+            $insert_class_stmt->closeCursor();
             $pdo->commit();
             $response = array('response' => SUCCESS);
         } catch (Exception $e) {
@@ -38,5 +37,4 @@
     $response = array('response' => NOT_LOGGED_IN);
     }
     echo json_encode($response);
-
 ?>

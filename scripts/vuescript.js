@@ -138,8 +138,8 @@ window.onload = function() {
 
                                             console.log(responseCode.nextHomework.name);
 
-                                            if (!(responseCode.nextHomework.name === null)) {
-                                                document.getElementById('dashboardContainer').insertAdjacentHTML('beforeend', '<div class="card"> <h1>Next Homework</h1> <b class="importantNumber">' + responseCode.nextHomework.name + '</b> <b>' + responseCode.nextHomework.class + '</b> <span>' + responseCode.nextHomework.date + '</span> </div>');
+                                            if (!(responseCode.nextHomework.name === null) && document.getElementById('nextHomework') == null) {
+                                                document.getElementById('dashboardContainer').insertAdjacentHTML('beforeend', '<div class="card" id="nextHomework"> <h1>Next Homework</h1> <b class="importantNumber">' + responseCode.nextHomework.name + '</b> <b>' + responseCode.nextHomework.class + '</b> <span>' + responseCode.nextHomework.date + '</span> </div>');
                                             }
 
                                             break;
@@ -163,7 +163,9 @@ window.onload = function() {
                                             case 0:
                                                 for (var i in responseCode.homeworks) {
                                                     var homework = responseCode.homeworks[i];
-                                                    document.getElementById('homeworksContainer').insertAdjacentHTML('afterbegin', '<div id="homework_'+ homework.id +'" class="card"><h1>'+ homework.name +'</h1><h1>'+ homework.class +'</h1><span>Until '+ homework.date +'</span></div>');
+                                                    if (document.getElementById('homework_'+homework.id) == null) {
+                                                        document.getElementById('homeworksContainer').insertAdjacentHTML('afterbegin', '<div id="homework_'+ homework.id +'" class="card"><h1>'+ homework.name +'</h1><h1>'+ homework.class +'</h1><span>Until '+ homework.date +'</span></div>');
+                                                    }
                                                 }
                                                 break;
                                             case 10:
@@ -203,7 +205,9 @@ window.onload = function() {
                                                             default:
                                                                 status = "Congratulations: You really broke it!"
                                                         }
-                                                        document.getElementById('classesContainer').insertAdjacentHTML('beforeend', '<div id="homework_'+ clas.id +'" class="card"><h1>'+ clas.name +'</h1><span>'+ status +'</span></div>');
+                                                        if (document.getElementById('class_'+clas.id) == null) {
+                                                            document.getElementById('classesContainer').insertAdjacentHTML('afterbegin', '<div id="class_'+ clas.id +'" class="card" onclick="javascript:classInfoPopUp('+ clas.id +');"><h1>'+ clas.name +'</h1><span>'+ status +'</span></div>');
+                                                        }
                                                     }
                                                     break;
                                                 case 10:
@@ -358,6 +362,114 @@ function logout() {
         document.cookie = 'cookiezi' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         app._router.push('/login');
     });
+}
+
+function addHomeworkPopUp() {
+    document.getElementById('popUp').classList.remove("hidden");
+    document.getElementById('homeworkPopUp').classList.remove("hidden");
+}
+function addHomework() {
+    let classId = document.getElementById('addHomeworkClass').value;
+    let name = document.getElementById('addHomeworkName').value;
+    let date = document.getElementById('addHomeworkDate').value;
+    Vue.http.post('php/insert_homework.php', {
+        c: classId,
+        n: name,
+        d: date,
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, Homework created");
+                popDown();
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+}
+
+function addClassPopUp() {
+    document.getElementById('popUp').classList.remove("hidden");
+    document.getElementById('classPopUp').classList.remove("hidden");
+}
+
+function addClass() {
+    let name = document.getElementById('addClassName').value;
+    Vue.http.post('php/insert_class.php', {
+        n: name
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, Class created");
+                popDown();
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+}
+
+function classInfoPopUp(classId) {
+    document.getElementById('popUp').classList.remove("hidden");
+    document.getElementById('classInfoPopUp').classList.remove("hidden");
+    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<span id="classIdSave" class="hidden">' + classId + '</span>')
+    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<div><span>Michl '+ classId +'</span> <span>Rep</span></div>');
+    // TODO: Make that the Classmebmers are variable
+}
+
+function inviteToClass() {
+    let username = document.getElementById('inviteUserName').value;
+    let classId = document.getElementById('classIdSave').innerText;
+
+    Vue.http.post('php/insert_invite.php', {
+        u: username,
+        c: classId
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        responseCode = responseCode.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, User invited");
+                popDown();
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+}
+
+function popDown() {
+    document.getElementById('popUp').classList.add("hidden");
+    document.getElementById('homeworkPopUp').classList.add("hidden");
+    document.getElementById('classPopUp').classList.add("hidden");
 }
 
 function passwordReset() {

@@ -23,7 +23,36 @@
         <router-view>
         </router-view>
 
-        <div id="notificationBar">
+        <div id="popUp" class="hidden">
+            <div id="homeworkPopUp" class="hidden popUp">
+                <form action="javascript:addHomework();">
+                    <input id="addHomeworkClass" type="text" name="class" placeholder="Class ID" class="text">
+                    <input id="addHomeworkName" type="text" name="name" placeholder="Name" class="text">
+                    <input id="addHomeworkDate" type="datetime-local" name="date" placeholder="Date" class="text">
+                    <input id="submitButton" type="submit" name="submit" value="Submit">
+                </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
+            <div id="classPopUp" class="hidden popUp">
+                <form action="javascript:addClass();">
+                    <input id="addClassName" type="text" name="name" placeholder="Name" class="text">
+                    <input id="submitButton" type="submit" name="submit" value="Submit">
+                </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
+            <div id="classInfoPopUp" class="hidden popUp">
+                <h1>ClassInfo</h1>
+                <div id="classMembers">
+                </div>
+                <form action="javascript:inviteToClass();">
+                    <input id="inviteUserName" type="text" name="name" placeholder="Username" class="text">
+                    <input id="submitButton" type="submit" name="submit" value="Invite">
+                </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
             <!-- <div class="notification">
                 <h1>Wrong Credentials</h1>
                 <p>Password or Username wrong, please check your input</p>
@@ -104,13 +133,12 @@
 </template>
 <template id="homeworks">
     <div class="cardContainer" id="homeworksContainer">
-
-        <button type="button" name="button">+</button>
+        <button type="button" name="button" onclick="javascript:addHomeworkPopUp();">+</button>
     </div>
 </template>
     <template id="classes">
     <div class="cardContainer" id="classesContainer">
-
+        <button type="button" name="button" onclick="javascript:addClassPopUp();">+</button>
     </div>
 </template>
     <template id="leaderboards">

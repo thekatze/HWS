@@ -27,26 +27,6 @@
 
     $get_user_stmt->closeCursor();
 
-
-/*
-    require_once('mailer/class.phpmailer.php');
-      $mail = new PHPMailer();
-      $mail->IsSMTP();
-      $mail->SMTPDebug  = 0;
-      $mail->SMTPAuth   = true;
-      $mail->SMTPSecure = "ssl";
-      $mail->Host       = "smtp.gmail.com";
-      $mail->Port       = 465;
-      $mail->Username="yourgmailid@gmail.com";
-      $mail->Password="yourgmailpassword";
-
-      $mail->AddAddress($email);
-      $mail->SetFrom('you@yourdomain.com','Coding Cage');
-      $mail->AddReplyTo("you@yourdomain.com","Coding Cage");
-      $mail->Subject    = $subject;
-      $mail->MsgHTML($message);
-      $mail->Send();
-*/
     $pdo->commit();
     $response = array('response' => SUCCESS);
     //YAY hat geklappt
