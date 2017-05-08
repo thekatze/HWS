@@ -324,6 +324,7 @@ function signup() {
 
 function logout() {
     Vue.http.post('php/logout.php', {}).then(response => {
+        document.cookie = 'cookiezi' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         app._router.push('/login');
     });
 }
