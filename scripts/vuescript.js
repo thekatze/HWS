@@ -492,12 +492,43 @@ function classRepInfoPopUp(classId) {
         myNode.removeChild(myNode.firstChild);
     }
 
-    document.getElementById('popUp').classList.remove("hidden");
-    document.getElementById('classRepInfoPopUp').classList.remove("hidden");
-    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+    Vue.http.post('php/update_class_members.php', {
+        c: classId
+    }).then(response =>{
+        let responseFull = JSON.parse(response.body);
 
-    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<div><span>Michl '+ classId +'</span><span>Rep</span></div>');
-    // TODO: Make that the Classmebmers are variable
+        responseCode = responseFull.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, You got mail");
+
+                var myNode = document.getElementById("classMembersNorm");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.firstChild);
+                }
+
+                document.getElementById('popUp').classList.remove("hidden");
+                document.getElementById('classRepInfoPopUp').classList.remove("hidden");
+                document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+
+                for (i of responseFull.class_members) {
+                    console.log(i);
+                    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<div><span>' + i + '</span></div>');
+                }
+                // TODO: Make that the Classmebmers are variable
+
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+
 }
 
 function classNormInfoPopUp(classId) {
@@ -506,12 +537,44 @@ function classNormInfoPopUp(classId) {
         myNode.removeChild(myNode.firstChild);
     }
 
-    document.getElementById('popUp').classList.remove("hidden");
-    document.getElementById('classNormInfoPopUp').classList.remove("hidden");
-    document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+    Vue.http.post('php/update_class_members.php', {
+        c: classId
+    }).then(response =>{
+        let responseFull = JSON.parse(response.body);
 
-    document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<div><span>Michl '+ classId +'</span><span>Rep</span></div>');
-    // TODO: Make that the Classmebmers are variable
+        responseCode = responseFull.response;
+        switch (responseCode) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, You got mail");
+
+                var myNode = document.getElementById("classMembersNorm");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.firstChild);
+                }
+
+                document.getElementById('popUp').classList.remove("hidden");
+                document.getElementById('classNormInfoPopUp').classList.remove("hidden");
+                document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+
+                for (i of responseFull.class_members) {
+                    console.log(i);
+                    document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<div><span>' + i + '</span></div>');
+                }
+                // TODO: Make that the Classmebmers are variable
+
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+
+
 }
 
 function classInvAcc(classId) {
