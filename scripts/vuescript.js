@@ -461,6 +461,59 @@ function addClassPopUp() {
     document.getElementById('classPopUp').classList.remove("hidden");
 }
 
+function addUploadPopUp() {
+    document.getElementById('popUp').classList.remove("hidden");
+    document.getElementById('uploadPopUp').classList.remove("hidden");
+}
+
+function addUpload() {
+    let file = document.getElementById('uploadFile').files[0];
+
+    var reader = new FileReader();
+
+    reader.onload = (e) => {
+        sendUpload(e.target.result);
+    };
+
+    reader.readAsBinaryString(file);
+}
+function sendUpload(fileData) {
+    let respect = document.getElementById('uploadRespect').value;
+    let dollaz = document.getElementById('uploadDollaz').value;
+    let description = document.getElementById('uploadDescription').value;
+    let file = document.getElementById('uploadFile').files[0];
+
+    Vue.http.post('php/insert_upload.php', {
+        r: respect,
+        d: dollaz,
+        n: description,
+        h: homeworkId,
+        f_name: file['name'],
+        f_size: file['size'],
+        f_type: file['type'],
+        f_data: fileData
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        switch (responseCode.response) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, Upload created");
+                popDown();
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log('There was an Error:');
+                console.log(responseCode.error);
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
+}
+
 function addClass() {
     let name = document.getElementById('addClassName').value;
     Vue.http.post('php/insert_class.php', {

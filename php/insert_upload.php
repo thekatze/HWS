@@ -2,31 +2,32 @@
   session_start();
 
   include 'functions.php';
+  include 'constants.php';
   $pdo = create_pdo();
 
   if (isset($_SESSION['login']) && $_SESSION['login'] == 1) {
-    if (isset($_POST['btn-upload']) && $_FILES['file']['size'] > 0 && isset($_FILES['file']['name'])) {
-      if ($_FILES['file']['size'] < 8388608) {
+      $post_data = file_get_contents("php://input");
+      $post_description = json_decode($post_data)->{'n'};
+      $post_respect = json_decode($post_data)->{'r'};
+      $post_dollaz = json_decode($post_data)->{'d'};
+      $post_homework = json_decode($post_data)->{'h'};
+      $file_name = json_decode($post_data)->{'f_name'};
+      $file_size = json_decode($post_data)->{'f_size'};
+      $file_type = json_decode($post_data)->{'f_type'};
+      $file_rawData = json_decode($post_data)->{'f_data'};
+
+    if ($file_size > 0 && isset($file_name)) {
+      if ($file_size < 8388608) {
         try {
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           $pdo->beginTransaction();
-          $f_name = $_FILES['file']['name'];
-          $f_tmpname = $_FILES['file']['tmp_name'];
-          $f_type = $_FILES['file']['type'];
-          $f_size = $_FILES['file']['size'];
-          $f_error = $_FILES['file']['error'];
-
-          $u_respect = $_POST['respect'];
-          $u_dollaz = $_POST['dollaz'];
-          $u_description = $_POST['description'];
-          $u_homework_id = $_POST['homework_id'];
-
-          $fp      = fopen($f_tmpname, 'r');
-          $content = fread($fp, filesize($f_tmpname));
+          /*
+          $fp      = fopen($file_tmp, 'r');
+          $content = fread($fp, filesize($file_tmp));
           fclose($fp);
-
+          */
           $exist_homework_stmt = $pdo->prepare("call exist_homework_id(:id_in)");
-          $exist_homework_stmt->bindParam(':id_in', $u_homework_id);
+          $exist_homework_stmt->bindParam(':id_in', $post_homework);
           $exist_homework_stmt->execute();
           $homeworkdata = $exist_homework_stmt->fetch();
           $exist_homework_stmt->closeCursor();
@@ -34,39 +35,39 @@
           if ($homeworkdata['response'] == 1) {
             $insert_upload_stmt = $pdo->prepare("call insert_upload_with_file(:user_in, :respect_in, :dollaz_in, :description_in, :homework_in, :file_name, :file_type, :file_size, :file_data, @id_out)");
             $insert_upload_stmt->bindParam(':user_in', $_SESSION['userid']);
-            $insert_upload_stmt->bindParam(':respect_in', $u_respect);
-            $insert_upload_stmt->bindParam(':dollaz_in', $u_dollaz);
-            $insert_upload_stmt->bindParam(':description_in', $u_description);
-            $insert_upload_stmt->bindParam(':homework_in', $u_homework_id);
-            $insert_upload_stmt->bindParam(':file_name', $f_name);
-            $insert_upload_stmt->bindParam(':file_type', $f_type);
-            $insert_upload_stmt->bindParam(':file_size', $f_size);
-            $insert_upload_stmt->bindParam(':file_data', $content);
+            $insert_upload_stmt->bindParam(':respect_in', $post_respect);
+            $insert_upload_stmt->bindParam(':dollaz_in', $post_dollaz);
+            $insert_upload_stmt->bindParam(':description_in', $post_description);
+            $insert_upload_stmt->bindParam(':homework_in', $post_homework);
+            $insert_upload_stmt->bindParam(':file_name', $file_name);
+            $insert_upload_stmt->bindParam(':file_type', $file_type);
+            $insert_upload_stmt->bindParam(':file_size', $file_size);
+            $insert_upload_stmt->bindParam(':file_data', $file_rawData);
 
             $insert_upload_stmt->execute();
-            echo $f_name." was successfully uploaded with the id: ".$pdo->query("select @id_out")->fetch()[0];
 
             $insert_upload_stmt->closeCursor();
             $pdo->commit();
+            $response = array('response' => SUCCESS);
           } else {
-            echo "This homework doesnt exist";
+            $response = array('response' => SQL_FAIL, 'error' => 'no response');
             $pdo->rollBack();
           }
           //YAY hat geklappt
         } catch (Exception $e) {
           $pdo->rollBack();
-          echo $e;
-          echo "SQL Error \n";
+          $response = array('response' => SQL_FAIL, 'error' => $e);
         }
       } else {
-        echo "File too big";
+        $response = array('response' => FAIL, 'error' => 'File to big');
       }
     } elseif (isset($_FILES['file']['name']) && $_FILES['file']['name'] != "") {
-      echo "Error with the File upload (Probably to big)";
+      $response = array('response' => FAIL, 'error' => 'Probably to big');
     } else {
-      echo "Kein File";
+      $response = array('response' => FAIL, 'error' => $_FILES);
     }
   } else {
-    echo "Not Logged in";
+    $response = array('response' => NOT_LOGGED_IN);
   }
+  echo json_encode($response);
 ?>
