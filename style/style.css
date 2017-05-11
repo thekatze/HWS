@@ -169,10 +169,6 @@ main {
     background-color: #6f869d;
     color: #e9eaea;
     box-sizing: content-box; }
-  .cardContainer .buttonInCard {
-    width: 80px;
-    margin-top: 20px;
-    margin-left: 0; }
 
 .card {
   width: 250px;
@@ -206,6 +202,10 @@ main {
   .card #logout {
     cursor: pointer;
     text-decoration: underline; }
+  .card > button {
+    width: 80px;
+    margin-top: 20px;
+    margin-left: 0; }
 
 /*
     Footer

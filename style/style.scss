@@ -245,12 +245,6 @@ main {
         box-sizing: content-box;
     }
 
-    .buttonInCard {
-      width: 80px;
-      margin-top: 20px;
-      margin-left: 0;
-    }
-
 }
 
 .card {
@@ -307,6 +301,12 @@ main {
     #logout {
         cursor: pointer;
         text-decoration: underline;
+    }
+
+    > button {
+      width: 80px;
+      margin-top: 20px;
+      margin-left: 0;
     }
 }
 

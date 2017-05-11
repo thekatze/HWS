@@ -16,8 +16,9 @@
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
 
-      $update_upload_stmt = $pdo->prepare("call get_upload_info(:homeworkid)");
+      $update_upload_stmt = $pdo->prepare("call get_upload_info(:homeworkid, :userid)");
       $update_upload_stmt->bindParam(':homeworkid', $post_homework);
+      $update_upload_stmt->bindParam(':userid', $_SESSION['userid']);
 
       $update_upload_stmt->execute();
       $data = $update_upload_stmt->fetchAll();
@@ -35,6 +36,10 @@
         $workedData[$i]['homeworkid'] = intval($data[$i]['homework_idhomework']);
         $workedData[$i]['respectE'] = intval($data[$i]['respect_earned']);
         $workedData[$i]['dollazE'] = intval($data[$i]['dollaz_earned']);
+        $workedData[$i]['bought'] = intval($data[$i]['bought']);
+        if ($workedData[$i]['userid'] == $_SESSION['userid']){
+            $workedData[$i]['bought'] = 1;
+        }
       }
 
       $update_upload_stmt->closeCursor();

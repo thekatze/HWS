@@ -214,13 +214,13 @@ window.onload = function() {
                                                         status = '<span>Congratulations: You broke it!<span>';
                                                         break;
                                                     case 1:
-                                                        status = '<span>Student<span><button class="buttonInCard" type="button" name="button" onclick="javascript:classNormInfoPopUp('+ clas.id +');">Info</button>';
+                                                        status = '<span>Student<span><button type="button" name="button" onclick="javascript:classNormInfoPopUp('+ clas.id +');">Info</button>';
                                                         break;
                                                     case 2:
-                                                        status = '<span>Invited<span><button class="buttonInCard" type="button" name="button" onclick="javascript:classInvAcc('+ clas.id +');">Accept</button><button class="buttonInCard" type="button" name="button" onclick="javascript:classInvDec('+ clas.id +');">Decline</button>';
+                                                        status = '<span>Invited<span><button type="button" name="button" onclick="javascript:classInvAcc('+ clas.id +');">Accept</button><button class="buttonInCard" type="button" name="button" onclick="javascript:classInvDec('+ clas.id +');">Decline</button>';
                                                         break;
                                                     case 3:
-                                                        status = '<span>Class Representative</span><button class="buttonInCard" type="button" name="button" onclick="javascript:classRepInfoPopUp('+ clas.id +');">Manage</button>';
+                                                        status = '<span>Class Representative</span><button type="button" name="button" onclick="javascript:classRepInfoPopUp('+ clas.id +');">Manage</button>';
                                                         break;
                                                     default:
                                                         status = '<span>Congratulations: You really broke it!<span>';
@@ -284,10 +284,15 @@ window.onload = function() {
                                             try {
                                                 if (responseCode.uploads[0].id >= 0) {
                                                     for (i of responseCode.uploads) {
-                                                        document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span></div>');
+                                                        if (i.bought == 1) {
+                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:downloadUpload('+ i.id +');">Download</button></div>');
+                                                        } else {
+                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:buyUpload('+ i.id +');">Buy</button></div>');
+                                                        }
                                                     }
                                                 }
                                             } catch (e) {
+                                                console.log(e);
                                                 document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div class="card"><h1>No Uploads Yet</h1></div>');
                                             }
                                         break;
@@ -328,6 +333,10 @@ window.onload = function() {
         app._router.push('/app');
     }
     app.reload();
+}
+
+function downloadUpload(id) {
+    window.location = 'php/download_file.php?id=' + id;
 }
 
 function homeworkRoute(id) {
@@ -459,6 +468,58 @@ function addHomework() {
 function addClassPopUp() {
     document.getElementById('popUp').classList.remove("hidden");
     document.getElementById('classPopUp').classList.remove("hidden");
+}
+
+function addUploadPopUp() {
+    document.getElementById('popUp').classList.remove("hidden");
+    document.getElementById('uploadPopUp').classList.remove("hidden");
+}
+
+function addUpload() {
+    let file = document.getElementById('uploadFile').files[0];
+
+    var reader = new FileReader();
+
+    reader.onload = (e) => {
+        sendUpload(e.target.result);
+    };
+
+    reader.readAsText(file);
+}
+function sendUpload(fileData) {
+    let respect = document.getElementById('uploadRespect').value;
+    let dollaz = document.getElementById('uploadDollaz').value;
+    let description = document.getElementById('uploadDescription').value;
+    let file = document.getElementById('uploadFile').files[0];
+    Vue.http.post('php/insert_upload.php', {
+        r: respect,
+        d: dollaz,
+        n: description,
+        h: homeworkId,
+        f_name: file['name'],
+        f_size: file['size'],
+        f_type: file['type'],
+        f_data: fileData
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        switch (responseCode.response) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, Upload created");
+                popDown();
+                app.reload();
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log('There was an Error:');
+                console.log(responseCode.error);
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
 }
 
 function addClass() {

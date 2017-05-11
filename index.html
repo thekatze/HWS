@@ -64,6 +64,19 @@
                 <button type="button" name="button" onclick="javascript:popDown();">close</button>
             </div>
 
+            <div id="uploadPopUp" class="hidden popUp">
+              <h1>Add a Upload</h1>
+              <form action="javascript:addUpload();" method="post" enctype="multipart/form-data">
+                <input id="uploadRespect" type="number" name="respect" placeholder="Respect" />
+                <input id="uploadDollaz" type="number" name="dollaz" placeholder="dollaz" />
+                <input id="uploadDescription" type="text" name="description" placeholder="description" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
+                <input id="uploadFile" type="file" name="file" />
+                <button type="submit" name="btn-upload">upload</button>
+              </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
             <!-- <div class="notification">
                 <h1>Wrong Credentials</h1>
                 <p>Password or Username wrong, please check your input</p>
@@ -192,7 +205,7 @@
 
 <template id="homework">
     <div class="cardContainer" id="homeworkContainer">
-
+        <button type="button" name="button" onclick="javascript:addUploadPopUp();">+</button>
     </div>
 </template>
 
