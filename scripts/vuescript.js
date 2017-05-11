@@ -467,13 +467,13 @@ function classRepInfoPopUp(classId) {
 
                 document.getElementById('popUp').classList.remove("hidden");
                 document.getElementById('classRepInfoPopUp').classList.remove("hidden");
-                document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+                document.getElementById('classMembers').insertAdjacentHTML('beforeend', '<p id="classIdSave" class="hidden">' + classId + '</p>');
 
                 for (i of responseFull.class_members) {
                     console.log(i);
-                    document.getElementById('classMembers').insertAdjacentHTML('afterbegin', '<div><span>' + i + '</span></div>');
+                    document.getElementById('classMembers').insertAdjacentHTML('beforeend', '<div><span>' + i + '</span></div>');
                 }
-                // TODO: Make that the Classmebmers are variable
+                // TODO: Make that the Classmebmers are variablete
 
                 break;
             case 12:
@@ -512,11 +512,11 @@ function classNormInfoPopUp(classId) {
 
                 document.getElementById('popUp').classList.remove("hidden");
                 document.getElementById('classNormInfoPopUp').classList.remove("hidden");
-                document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<p id="classIdSave" class="hidden">' + classId + '</p>');
+                document.getElementById('classMembersNorm').insertAdjacentHTML('beforeend', '<p id="classIdSave" class="hidden">' + classId + '</p>');
 
                 for (i of responseFull.class_members) {
                     console.log(i);
-                    document.getElementById('classMembersNorm').insertAdjacentHTML('afterbegin', '<div><span>' + i + '</span></div>');
+                    document.getElementById('classMembersNorm').insertAdjacentHTML('beforeend', '<div><span>' + i + '</span></div>');
                 }
                 // TODO: Make that the Classmebmers are variable
 
