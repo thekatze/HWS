@@ -285,9 +285,9 @@ window.onload = function() {
                                                 if (responseCode.uploads[0].id >= 0) {
                                                     for (i of responseCode.uploads) {
                                                         if (i.bought == 1) {
-                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:downloadUpload('+ i.id +');">Download</button></div>');
+                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:downloadUpload(' + i.id + ');">Download</button></div>');
                                                         } else {
-                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:buyUpload('+ i.id +');">Buy</button></div>');
+                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:buyUpload(' + i.id + ');">Buy</button></div>');
                                                         }
                                                     }
                                                 }
@@ -339,6 +339,46 @@ function downloadUpload(id) {
     window.location = 'php/download_file.php?id=' + id;
 }
 
+function buyUpload(uid) {
+
+    let uploadId = uid;
+
+    Vue.http.post('php/insert_buy_upload.php', {
+        u: uploadId
+    }).then(response => {
+
+        let responseCode = JSON.parse(response.body);
+
+        switch (responseCode.response) {
+            //Code 00: Success
+            case 0:
+                console.log("Successfully bought an Upload");
+                app.reload();
+                break;
+            case 10:
+                console.log("Error");
+                console.log(response.error);
+                break;
+            case 11:
+                console.log("Sql Fail");
+                console.log(response.error);
+                break;
+            case 12:
+                app._router.push('/app');
+                console.log("Not Logged in");
+                break;
+                //Any other code: wtf
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+
+
+    }, response => {
+        console.log("Failed to reach server.");
+        console.log(response);
+    });
+}
+
 function homeworkRoute(id) {
     app._router.push('/app/homework');
     if (homeworkId != id) {
@@ -375,7 +415,7 @@ function login() {
                 break;
                 //Code 10: Wrong Password
             case 10:
-                console.log("Wrong Password")
+                console.log("Wrong Password");
                 break;
                 //Code 11: MySQL Error
             case 11:

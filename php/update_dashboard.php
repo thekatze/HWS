@@ -26,23 +26,22 @@
       $update_dashboard_home_stmt->bindParam(':userid', $_SESSION['userid']);
 
       $update_dashboard_home_stmt->execute();
-      $data2 = $update_dashboard_home_stmt->fetch();
+      $data2 = $update_dashboard_home_stmt->fetchAll();
 
       $update_dashboard_home_stmt->closeCursor();
-
       $response = array(
         'response' => SUCCESS,
         'user' => array(
           'name' => $data['username'],
           'respect' => intval($data['respect']),
           'dollaz' => floatval($data['dollaz']),
-          'openHomeworks' => intval($data2['homeworkCount'])
+          'openHomeworks' => intval(sizeof($data2))
         ),
         'nextHomework' => array(
-          'id' => $data2['homeworkId'],
-          'name' => $data2['homeworkName'],
-          'class' => $data2['homeworkClass'],
-          'date' => $data2['homeworkDate']
+          'id' => $data2[0]['homeworkId'],
+          'name' => $data2[0]['homeworkName'],
+          'class' => $data2[0]['homeworkClass'],
+          'date' => $data2[0]['homeworkDate']
         )
       );
 
