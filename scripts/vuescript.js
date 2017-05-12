@@ -144,7 +144,7 @@ window.onload = function() {
                                             document.getElementById('dashboardRespect').innerText = responseCode.user.respect;
 
 
-                                            if (!(responseCode.nextHomework.name === null) && document.getElementById('nextHomework') == null) {
+                                            if ((!(responseCode.nextHomework.name === null) && !(responseCode.nextHomework.id == 0)) && document.getElementById('nextHomework') == null) {
                                                 document.getElementById('dashboardContainer').insertAdjacentHTML('beforeend', '<div class="card" id="nextHomework"> <h1>Next Homework</h1> <b class="importantNumber">' + responseCode.nextHomework.name + '</b> <b>' + responseCode.nextHomework.class + '</b> <span>' + responseCode.nextHomework.date + '</span> </div>');
                                             }
 
