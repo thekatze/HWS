@@ -435,6 +435,34 @@ function logout() {
 function addHomeworkPopUp() {
     document.getElementById('popUp').classList.remove("hidden");
     document.getElementById('homeworkPopUp').classList.remove("hidden");
+
+    var myNode = document.getElementById("addHomeworkClass");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
+    Vue.http.post('php/update_classes.php', {
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        switch (responseCode.response) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, you got your dropdown options created");
+                for (var i in responseCode.classes) {
+                    var clas = responseCode.classes[i];
+                    document.getElementById('addHomeworkClass').insertAdjacentHTML('afterbegin', '<option value="' + clas.id + '">' + clas.name + '</option>');;
+                }
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
 }
 function addHomework() {
     let classId = document.getElementById('addHomeworkClass').value;
@@ -473,6 +501,12 @@ function addClassPopUp() {
 function addUploadPopUp() {
     document.getElementById('popUp').classList.remove("hidden");
     document.getElementById('uploadPopUp').classList.remove("hidden");
+
+    var element = document.getElementById('uploadFormClass');
+    if (!(element === null)) {
+        element.parentNode.removeChild(element);
+    }
+    document.getElementById('uploadForm').insertAdjacentHTML('beforeend', '<input id="uploadFormClass" type="hidden" name="homework" value="' + homeworkId + '" />');
 }
 
 function addUpload() {

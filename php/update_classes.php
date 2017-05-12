@@ -11,7 +11,6 @@
     try {
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
-      $userid = 4;
       $update_classes_stmnt = $pdo->prepare("call get_classes_info(:userid)");
       $update_classes_stmnt->bindParam(':userid', $_SESSION['userid']);
 
