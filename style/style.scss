@@ -225,12 +225,11 @@ main {
     -ms-flex-line-pack: stretch;
     align-content: stretch;
 
-    button {
+    > button {
 
         position: relative;
 
         margin-left: 1em;
-
 
 
         border: 2px solid;
@@ -303,10 +302,23 @@ main {
         text-decoration: underline;
     }
 
-    > button {
+    button {
+
+      position: relative;
+
+      margin-left: 0;
+
+
+      border: 2px solid;
+
+      font-family: $headerFont;
+      font-size: 16pt;
+
       width: 80px;
       margin-top: 20px;
-      margin-left: 0;
+      background-color: $accent;
+      color: $bright;
+      box-sizing: content-box;
     }
 }
 

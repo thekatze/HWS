@@ -29,7 +29,7 @@
             <div id="homeworkPopUp" class="hidden popUp">
               <h1>Add a Homework</h1>
                 <form action="javascript:addHomework();">
-                    <input id="addHomeworkClass" type="text" name="class" placeholder="Class ID" class="text">
+                    <select id="addHomeworkClass" name="class"></select>
                     <input id="addHomeworkName" type="text" name="name" placeholder="Name" class="text">
                     <input id="addHomeworkDate" type="datetime-local" name="date" placeholder="Date" class="text">
                     <input id="submitButton" type="submit" name="submit" value="Submit">
@@ -66,12 +66,13 @@
 
             <div id="uploadPopUp" class="hidden popUp">
               <h1>Add a Upload</h1>
-              <form action="javascript:addUpload();" method="post" enctype="multipart/form-data">
+              <form id="uploadForm" action="php/upload_file.php" method="post" enctype="multipart/form-data">
                 <input id="uploadRespect" type="number" name="respect" placeholder="Respect" />
                 <input id="uploadDollaz" type="number" name="dollaz" placeholder="dollaz" />
                 <input id="uploadDescription" type="text" name="description" placeholder="description" />
                 <input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
                 <input id="uploadFile" type="file" name="file" />
+
                 <button type="submit" name="btn-upload">upload</button>
               </form>
                 <button type="button" name="button" onclick="javascript:popDown();">close</button>

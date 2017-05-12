@@ -144,7 +144,7 @@ window.onload = function() {
                                             document.getElementById('dashboardRespect').innerText = responseCode.user.respect;
 
 
-                                            if (!(responseCode.nextHomework.name === null) && document.getElementById('nextHomework') == null) {
+                                            if ((!(responseCode.nextHomework.name === null) && !(responseCode.nextHomework.id == 0)) && document.getElementById('nextHomework') == null) {
                                                 document.getElementById('dashboardContainer').insertAdjacentHTML('beforeend', '<div class="card" id="nextHomework"> <h1>Next Homework</h1> <b class="importantNumber">' + responseCode.nextHomework.name + '</b> <b>' + responseCode.nextHomework.class + '</b> <span>' + responseCode.nextHomework.date + '</span> </div>');
                                             }
 
@@ -285,9 +285,9 @@ window.onload = function() {
                                                 if (responseCode.uploads[0].id >= 0) {
                                                     for (i of responseCode.uploads) {
                                                         if (i.bought == 1) {
-                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:downloadUpload('+ i.id +');">Download</button></div>');
+                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:downloadUpload(' + i.id + ');">Download</button></div>');
                                                         } else {
-                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:buyUpload('+ i.id +');">Buy</button></div>');
+                                                            document.getElementById('homeworkContainer').insertAdjacentHTML('afterbegin', '<div id="upload_'+ i.id +'" class="card"><h1>'+ i.description +'</h1><span>Respect: '+ i.respect +'</span><span>Dollaz: '+ i.dollaz +'</span><span>Uploaded: '+ i.timestamp +'</span><button type="button" name="button" onclick="javascript:buyUpload(' + i.id + ');">Buy</button></div>');
                                                         }
                                                     }
                                                 }
@@ -339,6 +339,46 @@ function downloadUpload(id) {
     window.location = 'php/download_file.php?id=' + id;
 }
 
+function buyUpload(uid) {
+
+    let uploadId = uid;
+
+    Vue.http.post('php/insert_buy_upload.php', {
+        u: uploadId
+    }).then(response => {
+
+        let responseCode = JSON.parse(response.body);
+
+        switch (responseCode.response) {
+            //Code 00: Success
+            case 0:
+                console.log("Successfully bought an Upload");
+                app.reload();
+                break;
+            case 10:
+                console.log("Error");
+                console.log(response.error);
+                break;
+            case 11:
+                console.log("Sql Fail");
+                console.log(response.error);
+                break;
+            case 12:
+                app._router.push('/app');
+                console.log("Not Logged in");
+                break;
+                //Any other code: wtf
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+
+
+    }, response => {
+        console.log("Failed to reach server.");
+        console.log(response);
+    });
+}
+
 function homeworkRoute(id) {
     app._router.push('/app/homework');
     if (homeworkId != id) {
@@ -375,7 +415,7 @@ function login() {
                 break;
                 //Code 10: Wrong Password
             case 10:
-                console.log("Wrong Password")
+                console.log("Wrong Password");
                 break;
                 //Code 11: MySQL Error
             case 11:
@@ -435,6 +475,34 @@ function logout() {
 function addHomeworkPopUp() {
     document.getElementById('popUp').classList.remove("hidden");
     document.getElementById('homeworkPopUp').classList.remove("hidden");
+
+    var myNode = document.getElementById("addHomeworkClass");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+
+    Vue.http.post('php/update_classes.php', {
+    }).then(response =>{
+        let responseCode = JSON.parse(response.body);
+
+        switch (responseCode.response) {
+            //Code 00: Success
+            case 0:
+                console.log("Success, you got your dropdown options created");
+                for (var i in responseCode.classes) {
+                    var clas = responseCode.classes[i];
+                    document.getElementById('addHomeworkClass').insertAdjacentHTML('afterbegin', '<option value="' + clas.id + '">' + clas.name + '</option>');;
+                }
+                break;
+            case 12:
+                app._router.push('/login');
+                break;
+            default:
+                console.log("WTF, Login returned invalid response code.");
+        }
+    }, response => {
+        console.log("Failed to reach server.");
+    })
 }
 function addHomework() {
     let classId = document.getElementById('addHomeworkClass').value;
@@ -473,6 +541,12 @@ function addClassPopUp() {
 function addUploadPopUp() {
     document.getElementById('popUp').classList.remove("hidden");
     document.getElementById('uploadPopUp').classList.remove("hidden");
+
+    var element = document.getElementById('uploadFormClass');
+    if (!(element === null)) {
+        element.parentNode.removeChild(element);
+    }
+    document.getElementById('uploadForm').insertAdjacentHTML('beforeend', '<input id="uploadFormClass" type="hidden" name="homework" value="' + homeworkId + '" />');
 }
 
 function addUpload() {

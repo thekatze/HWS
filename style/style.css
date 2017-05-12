@@ -158,7 +158,7 @@ main {
   -webkit-align-content: stretch;
   -ms-flex-line-pack: stretch;
   align-content: stretch; }
-  .cardContainer button {
+  .cardContainer > button {
     position: relative;
     margin-left: 1em;
     border: 2px solid;
@@ -202,10 +202,17 @@ main {
   .card #logout {
     cursor: pointer;
     text-decoration: underline; }
-  .card > button {
+  .card button {
+    position: relative;
+    margin-left: 0;
+    border: 2px solid;
+    font-family: "Oswald", sans-serif;
+    font-size: 16pt;
     width: 80px;
     margin-top: 20px;
-    margin-left: 0; }
+    background-color: #6f869d;
+    color: #e9eaea;
+    box-sizing: content-box; }
 
 /*
     Footer
