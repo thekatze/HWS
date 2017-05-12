@@ -50,7 +50,7 @@
     } catch (Exception $e) {
       //Response if there is a SQL Error
       $pdo->rollBack();
-      $response = array('response' => SQL_FAIL);
+      $response = array('response' => SQL_FAIL, 'error' => $e);
     }
   } else {
     //Response if user is not logged in
