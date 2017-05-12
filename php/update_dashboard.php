@@ -12,15 +12,23 @@
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
 
-      $update_dashboard_stmt = $pdo->prepare("call get_dashboard_info(:userid)");
-      $update_dashboard_stmt->bindParam(':userid', $_SESSION['userid']);
+      $update_dashboard_user_stmt = $pdo->prepare("call get_dashboard_info_user(:userid)");
+      $update_dashboard_user_stmt->bindParam(':userid', $_SESSION['userid']);
 
-      $update_dashboard_stmt->execute();
-      $data = $update_dashboard_stmt->fetch();
+      $update_dashboard_user_stmt->execute();
+      $data = $update_dashboard_user_stmt->fetch();
 
-      $update_dashboard_stmt->closeCursor();
+      $update_dashboard_user_stmt->closeCursor();
 
 
+
+      $update_dashboard_home_stmt = $pdo->prepare("call get_dashboard_info_homework(:userid)");
+      $update_dashboard_home_stmt->bindParam(':userid', $_SESSION['userid']);
+
+      $update_dashboard_home_stmt->execute();
+      $data2 = $update_dashboard_home_stmt->fetch();
+
+      $update_dashboard_home_stmt->closeCursor();
 
       $response = array(
         'response' => SUCCESS,
@@ -28,13 +36,13 @@
           'name' => $data['username'],
           'respect' => intval($data['respect']),
           'dollaz' => floatval($data['dollaz']),
-          'openHomeworks' => intval($data['homeworkCount'])
+          'openHomeworks' => intval($data2['homeworkCount'])
         ),
         'nextHomework' => array(
-          'id' => $data['homeworkId'],
-          'name' => $data['homeworkName'],
-          'class' => $data['homeworkClass'],
-          'date' => $data['homeworkDate']
+          'id' => $data2['homeworkId'],
+          'name' => $data2['homeworkName'],
+          'class' => $data2['homeworkClass'],
+          'date' => $data2['homeworkDate']
         )
       );
 
