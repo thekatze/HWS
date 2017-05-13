@@ -25,9 +25,22 @@
             $upload = $get_upload_stmt->fetch();
             $get_upload_stmt->closeCursor();
 
-            if ($upload['respect_user'] < $upload['respect_cost'] || $upload['dollaz_user'] < $upload['dollaz_cost']) {
+            $buyerRes = $upload['respect_user'];
+            $sellerRes = $upload['respect_seller'];
+            $buyerDollaz = $upload['dollaz_user'];
+            $costDollaz = $upload['dollaz_cost'];
+            $costRespect = $upload['respect_cost'];
 
-                $respect = intval($upload['respect']/10);
+            if ($buyerRes >= $costRespect && $buyerDollaz >= $costDollaz) {
+
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+                //  All credit for this formula  //
+                //           goes to             //
+                //          TheKatze             //
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+                $respect = ceil(abs(log($buyerRes/(abs($sellerRes)+1), 10)) * pow($buyerRes, 1/1.7) + pow($costDollaz/10, -1/2));
+
+
 
                 $insert_buy_stmt = $pdo->prepare("call 	insert_upload_bought(:userid, :uploadid, :respect)");
                 $insert_buy_stmt->bindParam(':userid', $_SESSION['userid']);
@@ -38,18 +51,17 @@
 
                 $insert_buy_stmt->closeCursor();
 
-                $response = array(
-                    'response' => SUCCESS
-                );
+
+                $response = array('response' => SUCCESS);
+                $pdo->commit();
             } else {
+                $response = array('response' => FAIL, 'error' => "Not Enought Money or Respect");
                 $pdo->rollBack();
-                $response = array('response' => FAIL, 'error' = 'Not enough respect or dollaz');
             }
-        $pdo->commit();
         } catch (Exception $e) {
             //Response if there is a SQL Error
+            $response = array('response' => SQL_FAIL, 'error' => $e);
             $pdo->rollBack();
-            $response = array('response' => SQL_FAIL, 'error' = $e);
         }
     } else {
         //Response if user is not logged in
