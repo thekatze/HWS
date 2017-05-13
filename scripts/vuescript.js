@@ -357,11 +357,11 @@ function buyUpload(uid) {
                 break;
             case 10:
                 console.log("Error");
-                console.log(response.error);
+                console.log(responseCode.error);
                 break;
             case 11:
                 console.log("Sql Fail");
-                console.log(response.error);
+                console.log(responseCode.error);
                 break;
             case 12:
                 app._router.push('/app');
