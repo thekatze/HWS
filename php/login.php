@@ -40,7 +40,7 @@
       //Setting Session varibles
       $_SESSION['userid'] = $userdata['iduser'];
       $_SESSION['login'] = 1;
-      setcookie("cookiezi", $_SESSION['login'], 0, "/");
+      setcookie("cookiezi", $_SESSION['login'], 0, "/HWS");
       //Update the stored Session id
       $update_user_stmt = $pdo->prepare("call update_user_session_id(:id_in, :session_id_in)");
       $update_user_stmt->bindParam(':id_in', $userdata['iduser']);

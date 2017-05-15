@@ -12,29 +12,36 @@
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
 
-      $update_dashboard_stmt = $pdo->prepare("call get_dashboard_info(:userid)");
-      $update_dashboard_stmt->bindParam(':userid', $_SESSION['userid']);
+      $update_dashboard_user_stmt = $pdo->prepare("call get_dashboard_info_user(:userid)");
+      $update_dashboard_user_stmt->bindParam(':userid', $_SESSION['userid']);
 
-      $update_dashboard_stmt->execute();
-      $data = $update_dashboard_stmt->fetch();
+      $update_dashboard_user_stmt->execute();
+      $data = $update_dashboard_user_stmt->fetch();
 
-      $update_dashboard_stmt->closeCursor();
+      $update_dashboard_user_stmt->closeCursor();
 
 
 
+      $update_dashboard_home_stmt = $pdo->prepare("call get_dashboard_info_homework(:userid)");
+      $update_dashboard_home_stmt->bindParam(':userid', $_SESSION['userid']);
+
+      $update_dashboard_home_stmt->execute();
+      $data2 = $update_dashboard_home_stmt->fetchAll();
+
+      $update_dashboard_home_stmt->closeCursor();
       $response = array(
         'response' => SUCCESS,
         'user' => array(
           'name' => $data['username'],
           'respect' => intval($data['respect']),
           'dollaz' => floatval($data['dollaz']),
-          'openHomeworks' => intval($data['homeworkCount'])
+          'openHomeworks' => intval(sizeof($data2))
         ),
         'nextHomework' => array(
-          'id' => $data['homeworkId'],
-          'name' => $data['homeworkName'],
-          'class' => $data['homeworkClass'],
-          'date' => $data['homeworkDate']
+          'id' => $data2[0]['homeworkId'],
+          'name' => $data2[0]['homeworkName'],
+          'class' => $data2[0]['homeworkClass'],
+          'date' => $data2[0]['homeworkDate']
         )
       );
 
@@ -42,7 +49,7 @@
     } catch (Exception $e) {
       //Response if there is a SQL Error
       $pdo->rollBack();
-      $response = array('response' => SQL_FAIL);
+      $response = array('response' => SQL_FAIL, 'error' => $e);
     }
   } else {
     //Response if user is not logged in

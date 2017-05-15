@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="style/style.css" rel="stylesheet">
     <link href="style/login.css" rel="stylesheet">
+    <link rel="icon" href="./favicon.ico" />
 
     <title>Homework Sharing - Share your homeworks</title>
 </head>
@@ -23,7 +24,60 @@
         <router-view>
         </router-view>
 
-        <div id="notificationBar">
+        <div id="popUp" class="hidden popUp">
+
+            <div id="homeworkPopUp" class="hidden popUp">
+              <h1>Add a Homework</h1>
+                <form action="javascript:addHomework();">
+                    <select id="addHomeworkClass" name="class"></select>
+                    <input id="addHomeworkName" type="text" name="name" placeholder="Name" class="text">
+                    <input id="addHomeworkDate" type="datetime-local" name="date" placeholder="Date" class="text">
+                    <input id="submitButton" type="submit" name="submit" value="Submit">
+                </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
+            <div id="classPopUp" class="hidden popUp">
+              <h1>Add a Class</h1>
+                <form action="javascript:addClass();">
+                    <input id="addClassName" type="text" name="name" placeholder="Name" class="text">
+                    <input id="submitButton" type="submit" name="submit" value="Submit">
+                </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
+            <div id="classRepInfoPopUp" class="hidden popUp">
+                <h1>Info for the King</h1>
+                <div id="classMembers">
+                </div>
+                <form action="javascript:inviteToClass();">
+                    <input id="inviteUserName" type="text" name="name" placeholder="Username" class="text">
+                    <input id="submitButton" type="submit" name="submit" value="Invite">
+                </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
+            <div id="classNormInfoPopUp" class="hidden popUp">
+                <h1>Info for Normies</h1>
+                <div id="classMembersNorm">
+                </div>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
+            <div id="uploadPopUp" class="hidden popUp">
+              <h1>Add a Upload</h1>
+              <form id="uploadForm" action="php/upload_file.php" method="post" enctype="multipart/form-data">
+                <input id="uploadRespect" type="number" name="respect" placeholder="Respect" />
+                <input id="uploadDollaz" type="number" name="dollaz" placeholder="dollaz" />
+                <input id="uploadDescription" type="text" name="description" placeholder="description" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="8388608" />
+                <input id="uploadFile" type="file" name="file" />
+
+                <button type="submit" name="btn-upload">upload</button>
+              </form>
+                <button type="button" name="button" onclick="javascript:popDown();">close</button>
+            </div>
+
             <!-- <div class="notification">
                 <h1>Wrong Credentials</h1>
                 <p>Password or Username wrong, please check your input</p>
@@ -104,13 +158,12 @@
 </template>
 <template id="homeworks">
     <div class="cardContainer" id="homeworksContainer">
-
-        <button type="button" name="button">+</button>
+        <button type="button" name="button" onclick="javascript:addHomeworkPopUp();">+</button>
     </div>
 </template>
     <template id="classes">
     <div class="cardContainer" id="classesContainer">
-
+        <button type="button" name="button" onclick="javascript:addClassPopUp();">+</button>
     </div>
 </template>
     <template id="leaderboards">
@@ -148,6 +201,12 @@
             <span id="logout" onclick="javascript:logout();"> Logout </span>
         </div>
 
+    </div>
+</template>
+
+<template id="homework">
+    <div class="cardContainer" id="homeworkContainer">
+        <button type="button" name="button" onclick="javascript:addUploadPopUp();">+</button>
     </div>
 </template>
 
