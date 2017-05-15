@@ -134,7 +134,9 @@ window.onload = function() {
                     if (readCookies('cookiezi')) {
                         switch (route) {
                             case 'dashboard':
+                                startLoad();
                                 Vue.http.post('php/update_dashboard.php', {}).then(response => {
+                                    finishLoad();
                                     let responseCode = JSON.parse(response.body);
                                     switch (responseCode.response) {
                                         case 0:
@@ -163,7 +165,9 @@ window.onload = function() {
                                 });
                                 break;
                             case 'homeworks':
+                                startLoad();
                                 Vue.http.post('php/update_homeworks.php', {}).then(response => {
+                                    finishLoad();
                                     let responseCode = JSON.parse(response.body);
                                     switch (responseCode.response) {
                                         case 0:
@@ -194,7 +198,9 @@ window.onload = function() {
                                 });
                                 break;
                             case 'classes':
+                                startLoad();
                                 Vue.http.post('php/update_classes.php', {}).then(response => {
+                                    finishLoad();
                                     let responseCode = JSON.parse(response.body);
                                     switch (responseCode.response) {
                                         case 0:
@@ -243,7 +249,9 @@ window.onload = function() {
                                 });
                                 break;
                             case 'profile':
+                                startLoad();
                                 Vue.http.post('php/update_profile.php', {}).then(response => {
+                                    finishLoad();
                                     let responseCode = JSON.parse(response.body);
                                     switch (responseCode.response) {
                                         case 0:
@@ -267,9 +275,11 @@ window.onload = function() {
                                 });
                                 break;
                             case 'homework':
+                                startLoad();
                                 Vue.http.post('php/update_uploads.php', {
                                     h: homeworkId
                                 }).then(response => {
+                                    finishLoad();
                                     let responseCode = JSON.parse(response.body);
                                     switch (responseCode.response) {
                                         case 0:
@@ -342,11 +352,11 @@ function downloadUpload(id) {
 function buyUpload(uid) {
 
     let uploadId = uid;
-
+    startLoad();
     Vue.http.post('php/insert_buy_upload.php', {
         u: uploadId
     }).then(response => {
-
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -396,12 +406,12 @@ function login() {
     if (username == "" || password == "") {
         return;
     }
-
+    startLoad();
     Vue.http.post('php/login.php', {
         u: username,
         pw: password
     }).then(response => {
-
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -440,13 +450,13 @@ function signup() {
     if (username == "" || password == "" || email == "") {
         return;
     }
-
+    startLoad();
     Vue.http.post('php/register_user.php', {
         u: username,
         pw: password,
         e: email
     }).then(response => {
-
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -466,7 +476,9 @@ function signup() {
 }
 
 function logout() {
+    startLoad();
     Vue.http.post('php/logout.php', {}).then(response => {
+        finishLoad();
         document.cookie = 'cookiezi' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         app._router.push('/login');
     });
@@ -480,9 +492,9 @@ function addHomeworkPopUp() {
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
-
-    Vue.http.post('php/update_classes.php', {
-    }).then(response =>{
+    startLoad();
+    Vue.http.post('php/update_classes.php', {}).then(response =>{
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -508,11 +520,13 @@ function addHomework() {
     let classId = document.getElementById('addHomeworkClass').value;
     let name = document.getElementById('addHomeworkName').value;
     let date = document.getElementById('addHomeworkDate').value;
+    startLoad();
     Vue.http.post('php/insert_homework.php', {
         c: classId,
         n: name,
         d: date,
     }).then(response =>{
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -565,6 +579,7 @@ function sendUpload(fileData) {
     let dollaz = document.getElementById('uploadDollaz').value;
     let description = document.getElementById('uploadDescription').value;
     let file = document.getElementById('uploadFile').files[0];
+    startLoad();
     Vue.http.post('php/insert_upload.php', {
         r: respect,
         d: dollaz,
@@ -575,6 +590,7 @@ function sendUpload(fileData) {
         f_type: file['type'],
         f_data: fileData
     }).then(response =>{
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -598,9 +614,11 @@ function sendUpload(fileData) {
 
 function addClass() {
     let name = document.getElementById('addClassName').value;
+    startLoad();
     Vue.http.post('php/insert_class.php', {
         n: name
     }).then(response =>{
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -626,10 +644,11 @@ function classRepInfoPopUp(classId) {
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
-
+    startLoad();
     Vue.http.post('php/update_class_members.php', {
         c: classId
     }).then(response =>{
+        finishLoad();
         let responseFull = JSON.parse(response.body);
 
         responseCode = responseFull.response;
@@ -671,10 +690,11 @@ function classNormInfoPopUp(classId) {
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
-
+    startLoad();
     Vue.http.post('php/update_class_members.php', {
         c: classId
     }).then(response =>{
+        finishLoad();
         let responseFull = JSON.parse(response.body);
 
         responseCode = responseFull.response;
@@ -713,9 +733,11 @@ function classNormInfoPopUp(classId) {
 }
 
 function classInvAcc(classId) {
+    startLoad();
     Vue.http.post('php/invite_accept.php', {
         c: classId
     }).then(response =>{
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -736,9 +758,11 @@ function classInvAcc(classId) {
 }
 
 function classInvDec(classId) {
+    startLoad();
     Vue.http.post('php/invite_decline.php', {
         c: classId
     }).then(response =>{
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -761,11 +785,12 @@ function classInvDec(classId) {
 function inviteToClass() {
     let username = document.getElementById('inviteUserName').value;
     let classId = document.getElementById('classIdSave').innerText;
-
+    startLoad();
     Vue.http.post('php/insert_invite.php', {
         u: username,
         c: classId
     }).then(response =>{
+        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
