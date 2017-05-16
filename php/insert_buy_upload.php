@@ -36,9 +36,9 @@
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
                 //  All credit for this formula  //
                 //           goes to             //
-                //          TheKatze             //
+                //   TheKatze (Michl fixed it)   //
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-                $respect = ceil(abs(log($buyerRes/(abs($sellerRes)+1), 10)) * pow($buyerRes, 1/1.7) + pow($costDollaz/10, -1/2)+1);
+                $respect = ceil(abs(log(($buyerRes+1)/abs($sellerRes+1), 10)) * pow(($buyerRes+1), 1/1.7) + 1);;
 
 
 
