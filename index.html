@@ -23,7 +23,13 @@
     <div id="app">
         <router-view>
         </router-view>
+        <div id="cssloadContainer" class="hidden">
+          <div>
+            <div class="cssloadDoubleTorus">
 
+            </div>
+          </div>
+        </div>
         <div id="popUp" class="hidden popUp">
 
             <div id="homeworkPopUp" class="hidden popUp">
@@ -87,15 +93,8 @@
 
 
     </div>
-    <template id="menu">
+<template id="menu">
     <div>
-      <div id="cssloadContainer">
-        <div>
-          <div class="cssloadDoubleTorus">
-
-          </div>
-        </div>
-      </div>
         <header>
             <ul>
                 <router-link to="/app/dashboard">
@@ -169,14 +168,14 @@
     <template id="leaderboards">
     <div class="cardContainer">
         <div class="card">
-            <h1>Not yet implemented, come back later</h1>
+            <h1>Not yet implemented (never gonna be), dont come back</h1>
         </div>
     </div>
 </template>
     <template id="profile">
     <div class="cardContainer">
         <div class="card">
-            <h1 id="profileUsername">TheKatze</h1>
+            <h1 id="profileUsername">Username</h1>
             <span> User since </span>
             <b class="importantNumber" id="profileDate"></b>
         </div>
@@ -210,7 +209,7 @@
     </div>
 </template>
 
-    <template id="loading">
+<template id="loading">
     <div class="cssload-container">
         <div class="cssload-double-torus">
         </div>

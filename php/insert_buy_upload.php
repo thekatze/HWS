@@ -38,7 +38,7 @@
                 //           goes to             //
                 //          TheKatze             //
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-                $respect = ceil(abs(log($buyerRes/(abs($sellerRes)+1), 10)) * pow($buyerRes, 1/1.7) + pow($costDollaz/10, -1/2));
+                $respect = ceil(abs(log($buyerRes/(abs($sellerRes)+1), 10)) * pow($buyerRes, 1/1.7) + pow($costDollaz/10, -1/2)+1);
 
 
 
