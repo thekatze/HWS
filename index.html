@@ -23,7 +23,13 @@
     <div id="app">
         <router-view>
         </router-view>
+        <div id="cssloadContainer">
+          <div>
+            <div class="cssloadDoubleTorus">
 
+            </div>
+          </div>
+        </div>
         <div id="popUp" class="hidden popUp">
 
             <div id="homeworkPopUp" class="hidden popUp">
@@ -87,15 +93,8 @@
 
 
     </div>
-    <template id="menu">
+<template id="menu">
     <div>
-      <div id="cssloadContainer">
-        <div>
-          <div class="cssloadDoubleTorus">
-
-          </div>
-        </div>
-      </div>
         <header>
             <ul>
                 <router-link to="/app/dashboard">
@@ -210,7 +209,7 @@
     </div>
 </template>
 
-    <template id="loading">
+<template id="loading">
     <div class="cssload-container">
         <div class="cssload-double-torus">
         </div>

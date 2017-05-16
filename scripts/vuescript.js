@@ -159,7 +159,6 @@ window.onload = function() {
                                             app._router.push('/login');
                                             break;
                                     }
-                                    finishLoad();
                                 }, response => {
 
                                 });
@@ -332,7 +331,7 @@ window.onload = function() {
         },
 
         watch: {
-            '$route': function(newRoute, oldRoute) {
+            '_route': function(newRoute, oldRoute) {
                 this.updateData(newRoute.path.split('/')[2]);
             }
         }
@@ -406,12 +405,10 @@ function login() {
     if (username == "" || password == "") {
         return;
     }
-    startLoad();
     Vue.http.post('php/login.php', {
         u: username,
         pw: password
     }).then(response => {
-        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
@@ -421,7 +418,6 @@ function login() {
 
                 console.log(readCookies('cookiezi'));
                 app._router.push('/app');
-                startLoad();
                 break;
                 //Code 10: Wrong Password
             case 10:
@@ -450,13 +446,11 @@ function signup() {
     if (username == "" || password == "" || email == "") {
         return;
     }
-    startLoad();
     Vue.http.post('php/register_user.php', {
         u: username,
         pw: password,
         e: email
     }).then(response => {
-        finishLoad();
         let responseCode = JSON.parse(response.body);
 
         switch (responseCode.response) {
