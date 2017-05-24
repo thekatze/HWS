@@ -38,9 +38,7 @@
                 //           goes to             //
                 //   TheKatze (Michl fixed it)   //
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-                $respect = ceil(abs(log(($buyerRes+1)/abs($sellerRes+1), 10)) * pow(($buyerRes+1), 1/1.7) + 1);;
-
-
+                $respect = ceil(abs(log(($buyerRes+1)/abs($sellerRes+1), 10)) * pow(($buyerRes+1), 1/1.7) + 1);
 
                 $insert_buy_stmt = $pdo->prepare("call 	insert_upload_bought(:userid, :uploadid, :respect)");
                 $insert_buy_stmt->bindParam(':userid', $_SESSION['userid']);

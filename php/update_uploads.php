@@ -16,12 +16,21 @@
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $pdo->beginTransaction();
 
-      $update_upload_stmt = $pdo->prepare("call get_upload_info(:homeworkid, :userid)");
+      $update_upload_stmt = $pdo->prepare("call get_upload_info_uploads(:homeworkid)");
       $update_upload_stmt->bindParam(':homeworkid', $post_homework);
-      $update_upload_stmt->bindParam(':userid', $_SESSION['userid']);
 
       $update_upload_stmt->execute();
       $data = $update_upload_stmt->fetchAll();
+      $update_upload_stmt->closeCursor();
+
+
+      $update_upload_buy_stmt = $pdo->prepare("call get_upload_info_buy(:homeworkid, :userid)");
+      $update_upload_buy_stmt->bindParam(':homeworkid', $post_homework);
+      $update_upload_buy_stmt->bindParam(':userid', $_SESSION['userid']);
+
+      $update_upload_buy_stmt->execute();
+      $dataBuy = $update_upload_buy_stmt->fetchAll();
+      $update_upload_buy_stmt->closeCursor();
 
       //Clearing the SQL Array from some thing i dont need
       $workedData = array();
@@ -36,13 +45,19 @@
         $workedData[$i]['homeworkid'] = intval($data[$i]['homework_idhomework']);
         $workedData[$i]['respectE'] = intval($data[$i]['respect_earned']);
         $workedData[$i]['dollazE'] = intval($data[$i]['dollaz_earned']);
-        $workedData[$i]['bought'] = intval($data[$i]['bought']);
+        $workedData[$i]['bought'] = 0;
+
+        for ($j=0; $j < count($dataBuy) ; $j++) {
+            if ($workedData[$i]['id'] == $dataBuy[$j]['upload_idupload']) {
+                if ($dataBuy[$j]['user_iduser'] == $_SESSION['userid']) {
+                    $workedData[$i]['bought'] = 1;
+                }
+            }
+        }
         if ($workedData[$i]['userid'] == $_SESSION['userid']){
             $workedData[$i]['bought'] = 1;
         }
       }
-
-      $update_upload_stmt->closeCursor();
       //Creating the Success response
       $response = array(
         'response' => SUCCESS,
