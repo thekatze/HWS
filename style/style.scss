@@ -5,9 +5,10 @@ $accent: #6f869d;
 $brightAccent: #899cae;
 $bright: #e9eaea;
 
-$error: #9d6f6f;
-$warning: #9c9d6f;
+$error: #cf4a4a;
+$warning: #ffd91e;
 $success: #6f9d6f;
+$notify: #6f869d;
 
 $headerFont: 'Oswald', sans-serif;
 $normalFont: 'Lato', sans-serif;
@@ -52,6 +53,22 @@ html, body {
         width: 100%;
         position: absolute;
         background-color: $bright;
+    }
+
+    > #notificationBar {
+
+        width: $notificationWidth;
+        height: 100%;
+
+        position: fixed;
+        top: 0;
+        right: 0;
+
+        > .notification {
+            color: $bright;
+            height: $notificationHeight;
+            background-color: $success;
+        }
     }
 
     > #popUp {

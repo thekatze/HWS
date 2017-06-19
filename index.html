@@ -30,6 +30,12 @@
             </div>
           </div>
         </div>
+            <div id="notificationBar">
+                <div class="notification">
+                    <h1>Something bad happened</h1>
+                    <span>Were not sorry.</span>
+                </div>
+            </div>
         <div id="popUp" class="hidden popUp">
 
             <div id="homeworkPopUp" class="hidden popUp">
@@ -53,7 +59,7 @@
             </div>
 
             <div id="classRepInfoPopUp" class="hidden popUp">
-                <h1>Info for the King</h1>
+                <h1>Info for the Representative</h1>
                 <div id="classMembers">
                 </div>
                 <form action="javascript:inviteToClass();">
@@ -64,7 +70,7 @@
             </div>
 
             <div id="classNormInfoPopUp" class="hidden popUp">
-                <h1>Info for Normies</h1>
+                <h1>Info for Members</h1>
                 <div id="classMembersNorm">
                 </div>
                 <button type="button" name="button" onclick="javascript:popDown();">close</button>
@@ -228,7 +234,6 @@
 
                 <input id="submitButton" type="submit" name="submit" value="Submit">
             </form>
-            <span>Due to some technical issues the database has been reseted, we dont give a fuck about your opinion. (16.05 17:30)</span>
             <div class="links">
                 <div class="link">
                     <router-link to="register">
