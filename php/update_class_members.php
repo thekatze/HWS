@@ -50,5 +50,5 @@
     //Response if user is not logged in
     $response = array('response' => NOT_LOGGED_IN);
   }
-  echo json_encode($response);d
+  echo json_encode($response);
 ?>

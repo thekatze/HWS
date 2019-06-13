@@ -217,7 +217,7 @@ DROP procedure IF EXISTS `d8abase`.`get_user_username`;
 
 DELIMITER $$
 USE `d8abase`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_username`(IN `username_in` VARCHAR(45))
+CREATE PROCEDURE `get_user_username`(IN `username_in` VARCHAR(45))
     NO SQL
 BEGIN
 	SELECT iduser as iduser, password as password, session_id as session_id, status as status FROM user
@@ -235,7 +235,7 @@ DROP procedure IF EXISTS `d8abase`.`insert_class`;
 
 DELIMITER $$
 USE `d8abase`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_class`(IN `classname_in` VARCHAR(45), IN `iduser_in` INT, OUT `id_out` INT)
+CREATE PROCEDURE `insert_class`(IN `classname_in` VARCHAR(45), IN `iduser_in` INT, OUT `id_out` INT)
     NO SQL
 BEGIN
 	INSERT INTO class (className)
@@ -256,7 +256,7 @@ DROP procedure IF EXISTS `d8abase`.`insert_user`;
 
 DELIMITER $$
 USE `d8abase`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_user`(IN `username_in` VARCHAR(45), IN `email_in` VARCHAR(128), IN `passwd_in` VARCHAR(256), IN `token_in` VARCHAR(100), OUT `id_out` INT)
+CREATE PROCEDURE `insert_user`(IN `username_in` VARCHAR(45), IN `email_in` VARCHAR(128), IN `passwd_in` VARCHAR(256), IN `token_in` VARCHAR(100), OUT `id_out` INT)
     NO SQL
 BEGIN
 	INSERT INTO user (username, email, password, token, dollaz)
@@ -275,7 +275,7 @@ DROP procedure IF EXISTS `d8abase`.`update_user_session_id`;
 
 DELIMITER $$
 USE `d8abase`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user_session_id`(IN `id_in` INT, IN `session_id_in` VARCHAR(27))
+CREATE PROCEDURE `update_user_session_id`(IN `id_in` INT, IN `session_id_in` VARCHAR(27))
     NO SQL
 BEGIN
 	UPDATE user
@@ -499,7 +499,7 @@ DROP procedure IF EXISTS `d8abase`.`get_user_token`;
 
 DELIMITER $$
 USE `d8abase`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_token`(IN `iduser_in` INT)
+CREATE PROCEDURE `get_user_token`(IN `iduser_in` INT)
     NO SQL
 BEGIN
 	SELECT token as token FROM user
