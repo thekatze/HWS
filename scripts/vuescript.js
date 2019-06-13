@@ -497,7 +497,7 @@ function addHomeworkPopUp() {
                 console.log("Success, you got your dropdown options created");
                 for (var i in responseCode.classes) {
                     var clas = responseCode.classes[i];
-                    document.getElementById('addHomeworkClass').insertAdjacentHTML('afterbegin', '<option value="' + clas.id + '">' + clas.name + '</option>');;
+                    document.getElementById('addHomeworkClass').insertAdjacentHTML('afterbegin', '<option value="' + clas.id + '">' + clas.name + '</option>');
                 }
                 break;
             case 12:
